@@ -1,0 +1,48 @@
+# Site settings
+title: FactuIO - Documentación
+email: soporte@bcntec.es
+description: >-
+  Documentación oficial de FactuIO - Sistema de facturación 
+  verificada conforme al Registro de Facturación de la AEAT (Verifactu).
+
+baseurl: "/factuio-portal"
+url: "https://bcntec.github.io"
+
+twitter_username: bcntec
+github_username: bcntec
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:name/
+
+# Navigation
+nav:
+  - title: Inicio
+    url: /
+  - title: Rol Tenant
+    url: /rol-tenant/
+  - title: Rol Signer
+    url: /rol-signer/
+  - title: Uso de la API
+    url: /api-uso/
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
