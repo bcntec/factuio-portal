@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  /* Marca */
+  --color-electric: var(--bcn-mint-700);
+  --color-mint: var(--bcn-mint);
+  --color-mint-600: var(--bcn-mint-600);
+  --color-mint-tint: var(--bcn-mint-tint);
+  --color-mint-pastel: var(--bcn-mint-pastel);
+  --color-navy: var(--bcn-black);
+  --color-ink: var(--bcn-ink);
+  --color-ink-2: var(--bcn-ink-2);
+  --color-ink-3: var(--bcn-ink-3);
+  --color-peri: var(--bcn-orange);
+  --color-peach: var(--bcn-peach);
+  --color-peach-ink: var(--bcn-peach-ink);
+  --color-sky: var(--bcn-sky);
+  --color-sky-ink: var(--bcn-sky-ink);
+  --color-pink: var(--bcn-pink);
+  --color-surface: var(--bcn-surface);
+  --color-surface-2: var(--bcn-surface-2);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 14px;
+  --radius-3xl: 16px;
+  --radius-4xl: 18px;
+}
+
+/* ─── FactuIO · Brand tokens (copiados de factuio-web) ── */
+:root {
+  --bcn-mint: #0FB997; --bcn-mint-600: #0DA184; --bcn-mint-700: #0A7A65;
+  --bcn-mint-tint: #E7F8F3; --bcn-mint-pastel: #B9F3E9;
+  --bcn-black: #1C1A36; --bcn-orange: #5974D4;
+  --bcn-ink: #3D3A62; --bcn-ink-2: #56527A; --bcn-ink-3: #7A7794;
+  --bcn-line: #E9E9EF; --bcn-surface: #F8F8F8; --bcn-surface-2: #EFEEF5; --bcn-white: #FFFFFF;
+  --bcn-peach: #FFE8D3; --bcn-peach-line: #F4D3B2; --bcn-peach-ink: #6E4A1F;
+  --bcn-sky: #EEF7FD; --bcn-sky-line: #D4E8F7; --bcn-sky-ink: #3B5B8A;
+  --bcn-pink: #F3D7F3;
+  --bcn-positive: #0FB997; --bcn-warning: #F59E0B; --bcn-negative: #EF4444; --bcn-info: #5974D4;
+
+  --radius: 12px;
+  --background: var(--bcn-surface); --foreground: var(--bcn-ink);
+  --card: var(--bcn-white); --card-foreground: var(--bcn-ink);
+  --primary: var(--bcn-mint); --primary-foreground: var(--bcn-white);
+  --muted: var(--bcn-surface); --muted-foreground: var(--bcn-ink-3);
+  --accent: var(--bcn-mint-tint); --accent-foreground: var(--bcn-mint-700);
+  --border: var(--bcn-line); --ring: var(--bcn-mint);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground font-sans antialiased; font-weight: 400; }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), "Segoe UI", sans-serif;
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance;
+  }
+  :focus-visible { outline: 2px solid var(--bcn-mint); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+}
+
+@layer components {
+  /* Eyebrow / label: mono uppercase, teal (Proto B) */
+  .bcn-eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bcn-mint-700);
+  }
+  /* Label secundario mono uppercase (sin teal) — tiles, headers de sección */
+  .bcn-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted-foreground);
+  }
+  /* Datos numéricos / códigos en mono */
+  .bcn-num {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Wordmark factuio (Space Grotesk, minúsculas, "io" en teal via .bracket) */
+  .bcn-wordmark {
+    font-family: var(--font-display), "Segoe UI", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .bcn-wordmark .bracket {
+    color: var(--bcn-mint-700);
+    font-weight: 800;
+  }
+  /* Pill de estado — base compartida por todos los listings */
+  .bcn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 8px;
+    padding: 2px 10px;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  /* Tile de métrica (estilo seed-data: número mono grande + label) */
+  .bcn-tile {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--card);
+    padding: 1.25rem 1.5rem;
+  }
+  .bcn-tile .bcn-tile-n {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+}
+
+/* ─── Sombras suaves teñidas de navy (Proto A) ───────── */
+@layer utilities {
+  .brutal-shadow {
+    box-shadow:
+      rgba(28,26,54,0.16) 0px 6px 12px -2px,
+      rgba(0,0,0,0.06) 0px 3px 7px -3px;
+  }
+  .brutal-shadow-sm {
+    box-shadow:
+      rgba(28,26,54,0.10) 0px 2px 5px -1px,
+      rgba(0,0,0,0.04) 0px 1px 3px -1px;
+  }
+  .brutal-shadow-lg {
+    box-shadow:
+      rgba(28,26,54,0.18) 0px 24px 48px -24px,
+      rgba(0,0,0,0.08) 0px 18px 36px -18px;
+  }
+  .brutal-shadow-electric {
+    box-shadow:
+      rgba(15,185,151,0.25) 0px 6px 12px -2px,
+      rgba(0,0,0,0.08) 0px 3px 7px -3px;
+  }
+}
