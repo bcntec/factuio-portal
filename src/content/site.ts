@@ -16,6 +16,7 @@ export const site = {
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
   mobileMenuLabel: "Abrir menú",
+  mobileMenuCloseLabel: "Cerrar menú",
   meta: {
     title: "FactuIO — Facturación VERI*FACTU para autónomos y gestorías",
     description: "Facturas VERI*FACTU y TicketBAI, presupuestos, albaranes y gastos en un solo sitio. Sin permanencia.",

@@ -55,6 +55,7 @@ export const pricingLabels = {
 export const compareLabels = {
   feature: "Funcionalidad",
   included: "Incluido",
+  notIncluded: "No incluido",
 } as const;
 
 /** User-visible copy for the /precios page shell. */
@@ -74,6 +75,7 @@ export const pricingPage = {
       { tone: "pink", text: "Soporte en español" },
     ],
   },
+  plans: { eyebrow: "Planes", title: "Elige tu plan" },
   compare: { eyebrow: "Comparativa", title: "Compara los planes en detalle" },
   faq: { eyebrow: "FAQ", title: "Preguntas frecuentes" },
   cta: {

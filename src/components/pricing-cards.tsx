@@ -51,7 +51,7 @@ export function PricingCards({ compact = false }: { compact?: boolean }) {
                   <ul className="flex flex-col gap-2 text-[14.5px]">
                     {p.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5">
-                        <span className={clsx("mt-0.5 grid size-5 shrink-0 place-items-center rounded-md", p.featured ? "bg-mint text-white" : "bg-mint-pastel text-navy")}><Check size={12} strokeWidth={3} /></span>
+                        <span className={clsx("mt-0.5 grid size-5 shrink-0 place-items-center rounded-md", p.featured ? "bg-mint text-white" : "bg-mint-pastel text-navy")}><Check size={12} strokeWidth={3} aria-hidden="true" /></span>
                         {f}
                       </li>
                     ))}

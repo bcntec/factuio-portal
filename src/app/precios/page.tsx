@@ -28,7 +28,10 @@ export default function PricingPage() {
           </div>
         </div>
       </header>
-      <section id="planes" className="mx-auto max-w-[1120px] px-6 py-14"><PricingCards /></section>
+      <section id="planes" className="mx-auto max-w-[1120px] px-6 py-14">
+        <SectionHeading eyebrow={pricingPage.plans.eyebrow} title={pricingPage.plans.title} />
+        <PricingCards />
+      </section>
       <section id="compara" className="mx-auto max-w-[1120px] px-6 py-14">
         <SectionHeading eyebrow={pricingPage.compare.eyebrow} title={pricingPage.compare.title} />
         <CompareTable />

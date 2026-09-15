@@ -36,10 +36,11 @@ export function SiteNav() {
       <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-6">
         <Link href="/" className="bcn-wordmark text-xl text-navy">factu<span className="bracket">io</span></Link>
         <div className="hidden items-center gap-6 md:flex">{links}{ctas}</div>
-        <details className="relative md:hidden" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
-          <summary className="list-none rounded-lg p-2 hover:bg-surface" aria-label={site.mobileMenuLabel} aria-expanded={open}><Menu size={22} aria-hidden="true" /></summary>
+        <details className="relative md:hidden" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}
+          onKeyDown={(e) => { if (e.key === "Escape") setOpen(false); }}>
+          <summary className="list-none rounded-lg p-2 hover:bg-surface" aria-label={open ? site.mobileMenuCloseLabel : site.mobileMenuLabel} aria-expanded={open}><Menu size={22} aria-hidden="true" /></summary>
           {open && (
-            <div className="absolute right-0 mt-2 flex w-56 flex-col gap-3 rounded-xl border border-border bg-card p-4 brutal-shadow-lg">{links}{ctas}</div>
+            <div onClick={() => setOpen(false)} className="absolute right-0 mt-2 flex w-56 flex-col gap-3 rounded-xl border border-border bg-card p-4 brutal-shadow-lg">{links}{ctas}</div>
           )}
         </details>
       </div>
