@@ -13,10 +13,10 @@ export function DashboardMock() {
         </div>
         <div className="rounded-xl bg-sky p-4"><p className="bcn-label">{m.pending.label}</p><p className="bcn-num mt-1 text-xl font-bold text-navy">{m.pending.value}</p></div>
         <div className="rounded-xl bg-peach p-4"><p className="bcn-label">{m.overdue.label}</p><p className="bcn-num mt-1 text-xl font-bold text-navy">{m.overdue.value}</p></div>
-        <div className="flex h-24 items-end gap-2 rounded-xl border border-border p-3">
+        <div className="flex h-24 items-stretch gap-2 rounded-xl border border-border p-3 sm:col-span-3">
           {m.bars.map((h, i) => (
-            <div key={i} className="flex flex-1 flex-col items-center gap-1">
-              <div className="flex h-full w-full items-end justify-center gap-0.5">
+            <div key={i} className="flex flex-1 flex-col items-center justify-end gap-1">
+              <div className="flex w-full flex-1 items-end justify-center gap-0.5">
                 <span className="w-2 rounded-t bg-mint" style={{ height: `${h}%` }} />
                 <span className="w-2 rounded-t bg-peri opacity-75" style={{ height: `${m.barsExpenses[i]}%` }} />
               </div>

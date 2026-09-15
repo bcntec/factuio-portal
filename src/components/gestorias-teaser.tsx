@@ -13,7 +13,7 @@ export function GestoriasTeaser() {
           <Link href="/gestorias/" className="mt-6 inline-block rounded-lg bg-mint px-6 py-3 font-bold text-white hover:bg-mint-600">{g.cta}</Link>
         </div>
         <ul className="flex flex-col gap-3">
-          {g.bullets.map((b) => <li key={b} className="flex items-center gap-3 text-[15px]"><span className="grid size-6 place-items-center rounded-md bg-mint"><Check size={14} strokeWidth={3} /></span>{b}</li>)}
+          {g.bullets.map((b) => <li key={b} className="flex items-center gap-3 text-[15px]"><span className="grid size-6 place-items-center rounded-md bg-mint"><Check size={14} strokeWidth={3} aria-hidden="true" /></span>{b}</li>)}
         </ul>
       </div>
     </section>
