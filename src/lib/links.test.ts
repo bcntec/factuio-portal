@@ -14,16 +14,4 @@ describe("links", () => {
     const { appUrl } = await import("./links");
     expect(() => appUrl("/login")).toThrow("NEXT_PUBLIC_APP_URL is not set");
   });
-
-  it("withBasePath prefixes NEXT_PUBLIC_BASE_PATH", async () => {
-    vi.stubEnv("NEXT_PUBLIC_BASE_PATH", "/factuio-portal");
-    const { withBasePath } = await import("./links");
-    expect(withBasePath("/og.png")).toBe("/factuio-portal/og.png");
-  });
-
-  it("withBasePath is identity when base path is empty", async () => {
-    vi.stubEnv("NEXT_PUBLIC_BASE_PATH", "");
-    const { withBasePath } = await import("./links");
-    expect(withBasePath("/og.png")).toBe("/og.png");
-  });
 });

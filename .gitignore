@@ -6,3 +6,6 @@ test-results/
 playwright-report/
 .migration/
 .pw-serve/
+.DS_Store
+.idea/
+.vscode/

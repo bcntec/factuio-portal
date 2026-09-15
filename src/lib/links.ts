@@ -8,9 +8,3 @@ function readAppUrl(): string {
 export function appUrl(path: string): string {
   return `${readAppUrl()}${path.startsWith("/") ? path : `/${path}`}`;
 }
-
-/** Prefix for static assets referenced by absolute path (public/). */
-export function withBasePath(path: string): string {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  return `${base}${path}`;
-}
