@@ -1,6 +1,9 @@
 export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
+export const siteUrl = "https://bcntec.github.io/factuio-portal";
+export const siteRoutes = ["/", "/precios/", "/gestorias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
+
 export const site = {
   name: "FactuIO",
   company: "BCN-TEC",
@@ -13,6 +16,15 @@ export const site = {
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
   mobileMenuLabel: "Abrir menú",
+  meta: {
+    title: "FactuIO — Facturación VERI*FACTU para autónomos y gestorías",
+    description: "Facturas VERI*FACTU y TicketBAI, presupuestos, albaranes y gastos en un solo sitio. Sin permanencia.",
+  },
+  legalDraftNotice: "Borrador pendiente de revisión legal.",
+  notFound: {
+    title: "Esta página no existe",
+    back: "Volver al inicio",
+  },
   footer: {
     tagline: "Facturación VERI*FACTU para autónomos y gestorías.",
     columns: [
