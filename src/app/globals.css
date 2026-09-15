@@ -34,6 +34,12 @@
   --color-pink: var(--bcn-pink);
   --color-surface: var(--bcn-surface);
   --color-surface-2: var(--bcn-surface-2);
+  --color-navy-muted: var(--bcn-navy-muted);
+  --color-line-strong: var(--bcn-line-strong);
+  --color-surface-row: var(--bcn-surface-row);
+  --color-negative-tint: var(--bcn-negative-tint);
+  --color-negative-ink: var(--bcn-negative-ink);
+  --color-negative-line: var(--bcn-negative-line);
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
@@ -54,6 +60,8 @@
   --bcn-sky: #EEF7FD; --bcn-sky-line: #D4E8F7; --bcn-sky-ink: #3B5B8A;
   --bcn-pink: #F3D7F3;
   --bcn-positive: #0FB997; --bcn-warning: #F59E0B; --bcn-negative: #EF4444; --bcn-info: #5974D4;
+  --bcn-navy-muted: #B6B3CF; --bcn-line-strong: #C9C7D8; --bcn-surface-row: #FBFBFD;
+  --bcn-negative-tint: #FDE3E3; --bcn-negative-ink: #A93B3B; --bcn-negative-line: #F5C2C2;
 
   --radius: 12px;
   --background: var(--bcn-surface); --foreground: var(--bcn-ink);
