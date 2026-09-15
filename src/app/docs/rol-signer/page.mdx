@@ -1,0 +1,277 @@
+export const metadata = { title: "Rol Signer", description: "Guía del rol Signer" };
+
+# Rol Signer
+
+El **Signer** es el usuario autorizado para crear, firmar y gestionar facturas en nombre de una empresa. Representa típicamente a un contable, administrativo o cualquier persona con capacidad legal para firmar documentos fiscales.
+
+<Callout kind="info" title="Definición">
+Un Signer es un firmante autorizado que puede crear facturas, aplicarles la firma electrónica requerida por Verifactu y gestionar el ciclo de vida de las mismas.
+</Callout>
+
+---
+
+## Características del Rol Signer
+
+| Aspecto | Descripción |
+|---------|-------------|
+| **Creación** | Creado por el Tenant (administrador) |
+| **Autenticación** | API key proporcionada por el Tenant |
+| **Alcance** | Limitado a las empresas asignadas |
+| **Operaciones** | CRUD de facturas + firma |
+
+---
+
+## Activación de Cuenta
+
+Cuando el Tenant crea un Signer, este recibe un email de activación:
+
+### Proceso de Activación
+
+1. **Recibe email** con enlace de activación
+2. **Establece contraseña** segura
+3. **Configura 2FA** (recomendado)
+4. **Obtiene API key** del Tenant para integraciones
+
+<Callout kind="warning" title="⚠️ Importante">
+El enlace de activación expira en 24 horas. Si caduca, el Tenant debe reenviar la invitación.
+</Callout>
+
+---
+
+## Operaciones Permitidas
+
+### Gestión de Facturas
+
+<Endpoint method="POST" path="/api/invoices/submit" />
+
+Crear y enviar una factura:
+
+```json
+{
+  "invoice": {
+    "company_id": "770e8400-e29b-41d4-a716-446655440002",
+    "customer": {
+      "name": "Cliente Ejemplo S.A.",
+      "nif": "A87654321",
+      "address": "Av. Diagonal 456, Barcelona"
+    },
+    "items": [
+      {
+        "description": "Servicios de consultoría",
+        "quantity": 1,
+        "unit_price": 1000.00,
+        "vat_rate": 21.0
+      }
+    ],
+    "issue_date": "2024-01-15",
+    "payment_method": "TRANSFER"
+  },
+  "submit": true
+}
+```
+
+### Respuesta
+
+```json
+{
+  "invoice": {
+    "id": "880e8400-e29b-41d4-a716-446655440003",
+    "invoice_number": "FAC-2024-001",
+    "total_amount": 1210.00,
+    "status": "SUBMITTED",
+    "qr_code": "https://factuo.io/qr/...",
+    "verification_url": "https://www2.agenciatributaria.gob.es/...",
+    "created_at": "2024-01-15T14:30:00Z"
+  },
+  "submission": {
+    "id": "990e8400-e29b-41d4-a716-446655440004",
+    "status": "PENDING",
+    "aeat_response_code": null
+  }
+}
+```
+
+### Operaciones en Lote
+
+<Endpoint method="POST" path="/api/invoices/batch-submit" />
+
+```json
+{
+  "invoices": [
+    { /* factura 1 */ },
+    { /* factura 2 */ },
+    { /* factura 3 */ }
+  ],
+  "submit": true
+}
+```
+
+---
+
+## Estados de una Factura
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   DRAFT     │───▶│  SIGNED     │───▶│  SUBMITTED  │───▶│  CONFIRMED  │
+│  (Borrador) │    │  (Firmada)  │    │  (Enviada)  │    │ (Confirmada)│
+└─────────────┘    └─────────────┘    └──────┬──────┘    └─────────────┘
+                                             │
+                                             ▼
+                                      ┌─────────────┐
+                                      │    ERROR    │
+                                      │   (Error)   │
+                                      └─────────────┘
+```
+
+| Estado | Descripción |
+|--------|-------------|
+| `DRAFT` | Factura creada pero no firmada |
+| `SIGNED` | Firmada digitalmente, lista para envío |
+| `SUBMITTED` | Enviada a la AEAT, esperando confirmación |
+| `CONFIRMED` | Confirmada por la AEAT |
+| `ERROR` | Error en el proceso, requiere revisión |
+
+---
+
+## Firma de Facturas
+
+### Tipos de Firma
+
+| Tipo | Descripción | Uso |
+|------|-------------|-----|
+| **Factura completa** | Firma con certificado digital del signatario | Facturas normales |
+| **Sello de tiempo** | Marca temporal adicional | Alto valor |
+| **Firma delegada** | A través de representante | Casos especiales |
+
+### Proceso de Firma
+
+1. El Signer crea la factura con `submit: false`
+2. Revisa los datos de la factura
+3. Aplica la firma digital (automática con API key)
+4. Opcionalmente, envía a la AEAT
+
+```json
+// Crear sin enviar
+{
+  "invoice": { /* datos */ },
+  "submit": false  // Solo crea, no firma ni envía
+}
+```
+
+---
+
+## Gestión de Empresas
+
+Un Signer puede operar sobre múltiples empresas si el Tenant así lo configura:
+
+```json
+// Listar empresas asignadas
+GET /api/companies
+
+{
+  "companies": [
+    {
+      "id": "770e8400-e29b-41d4-a716-446655440002",
+      "name": "Mi Empresa Principal S.L.",
+      "nif": "B12345678",
+      "is_default": true
+    },
+    {
+      "id": "770e8400-e29b-41d4-a716-446655440003",
+      "name": "Mi Otra Empresa S.A.",
+      "nif": "A87654321",
+      "is_default": false
+    }
+  ]
+}
+```
+
+---
+
+## API Key del Signer
+
+El Signer utiliza la API key proporcionada por el Tenant:
+
+```bash
+# Ejemplo de autenticación
+curl -X POST https://api.factuo.io/api/invoices/submit \
+  -H "Authorization: Bearer factuio_sk_live_51H8m...a3B9" \
+  -H "Content-Type: application/json" \
+  -d '{"invoice": {...}}'
+```
+
+<Callout kind="danger" title="🔐 Seguridad">
+<ul>
+<li>Nunca compartas tu API key</li>
+<li>No la incluyas en código frontend</li>
+<li>Úsala solo en servidores backend seguros</li>
+<li>Solicita una nueva si sospechas compromiso</li>
+</ul>
+</Callout>
+
+---
+
+## Webhooks para Signers
+
+Si el Tenant ha configurado webhooks, el Signer recibe notificaciones de:
+
+```json
+// Ejemplo de notificación webhook
+{
+  "event": "invoice.signed",
+  "timestamp": "2024-01-15T14:35:00Z",
+  "data": {
+    "invoice_id": "880e8400-e29b-41d4-a716-446655440003",
+    "invoice_number": "FAC-2024-001",
+    "signer_id": "550e8400-e29b-41d4-a716-446655440000",
+    "company_id": "770e8400-e29b-41d4-a716-446655440002",
+    "total_amount": 1210.00
+  }
+}
+```
+
+---
+
+## Casos de Uso Comunes
+
+### 1. Integración ERP
+```
+ERP ──▶ API (Signer) ──▶ FactuIO ──▶ AEAT
+```
+
+### 2. Portal Web
+```
+Web ──▶ Backend ──▶ API (Signer) ──▶ FactuIO
+```
+
+### 3. Procesamiento por Lotes
+```
+CSV/Excel ──▶ Script ──▶ Batch API ──▶ FactuIO
+```
+
+---
+
+## Límites del Signer
+
+| Límite | Valor | Descripción |
+|--------|-------|-------------|
+| Facturas/hora | 100 | Por signer |
+| Facturas/día | 1,000 | Por signer |
+| Tamaño máximo | 10MB | Por request |
+| Campos items | 100 | Máximo por factura |
+
+---
+
+## Preguntas Frecuentes
+
+**¿Puedo firmar facturas de varias empresas?**
+Sí, si el Tenant te ha asignado permisos sobre ellas.
+
+**¿Qué pasa si la AEAT rechaza una factura?**
+Recibirás una notificación con el código de error. Puedes corregir y reenviar.
+
+**¿Puedo modificar una factura ya firmada?**
+No, las facturas firmadas son inmutables. Debes crear una factura rectificativa.
+
+**¿Cómo obtengo el QR de verificación?**
+Se genera automáticamente y viene en la respuesta de la API (`qr_code`).

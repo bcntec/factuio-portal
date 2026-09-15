@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
 };
 
-const withMDX = createMDX({});
+const withMDX = createMDX({
+  // Plugin passed as a module specifier string (not an imported function) so
+  // Turbopack's loader config stays serializable across the Rust/JS boundary.
+  options: { remarkPlugins: ["remark-gfm"] },
+});
 
 export default withMDX(nextConfig);

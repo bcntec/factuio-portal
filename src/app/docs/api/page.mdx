@@ -1,0 +1,493 @@
+export const metadata = { title: "Uso de la API", description: "Referencia de la API REST de FactuIO" };
+
+# Uso de la API
+
+La API de FactuIO permite integrar la funcionalidad de facturación verificada en cualquier sistema o aplicación. Está diseñada siguiendo los principios REST y utiliza JSON para el intercambio de datos.
+
+<Callout kind="success" title="✅ API RESTful">
+<ul>
+<li>Autenticación mediante API Keys</li>
+<li>Respuestas en formato JSON</li>
+<li>Códigos HTTP estándar</li>
+<li>Documentación OpenAPI/Swagger disponible</li>
+</ul>
+</Callout>
+
+---
+
+## URL Base
+
+| Entorno | URL Base |
+|---------|----------|
+| Producción | `https://api.factuo.io/api` |
+| Sandbox/Pruebas | `https://api-sandbox.factuo.io/api` |
+
+---
+
+## Autenticación
+
+Todas las peticiones deben incluir la API key en el header `Authorization`:
+
+```bash
+curl -H "Authorization: Bearer factuio_sk_live_..." \
+     https://api.factuo.io/api/invoices
+```
+
+### Formatos de API Key
+
+| Tipo | Prefijo | Uso |
+|------|---------|-----|
+| Tenant Live | `factuio_tk_live_` | Administración de tenant |
+| Tenant Test | `factuio_tk_test_` | Pruebas de administración |
+| Signer Live | `factuio_sk_live_` | Operaciones de facturación |
+| Signer Test | `factuio_sk_test_` | Pruebas de facturación |
+
+---
+
+## Endpoints Principales
+
+### Facturas
+
+<Endpoint method="POST" path="/api/invoices/submit" />
+
+Crear y opcionalmente enviar una factura.
+
+**Request:**
+```json
+{
+  "invoice": {
+    "company_id": "uuid-de-la-empresa",
+    "invoice_number": "FAC-2024-001",
+    "issue_date": "2024-01-15",
+    "operation_date": "2024-01-15",
+    "customer": {
+      "name": "Cliente Ejemplo S.A.",
+      "nif": "A87654321",
+      "address": "Avenida Diagonal 456",
+      "postal_code": "08006",
+      "city": "Barcelona",
+      "province": "Barcelona",
+      "country": "ES"
+    },
+    "items": [
+      {
+        "description": "Servicios de desarrollo software",
+        "quantity": 10,
+        "unit_price": 150.00,
+        "discount": 0,
+        "vat_rate": 21.0
+      }
+    ],
+    "payment_method": "TRANSFER",
+    "payment_terms": "30 días"
+  },
+  "submit": true
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "invoice": {
+    "id": "880e8400-e29b-41d4-a716-446655440003",
+    "invoice_number": "FAC-2024-001",
+    "issue_date": "2024-01-15",
+    "total_amount": 1815.00,
+    "tax_amount": 315.00,
+    "currency": "EUR",
+    "status": "SUBMITTED",
+    "qr_code": "https://api.factuo.io/qr/880e8400...",
+    "verification_url": "https://www2.agenciatributaria.gob.es/wlpl/TIKE-CONT/ValidarQR?...",
+    "aeat_registration_id": "ES12345678Z-2024-001",
+    "created_at": "2024-01-15T10:30:00Z",
+    "signed_at": "2024-01-15T10:30:05Z"
+  },
+  "submission": {
+    "id": "990e8400-e29b-41d4-a716-446655440004",
+    "status": "PENDING",
+    "submitted_at": "2024-01-15T10:30:10Z"
+  }
+}
+```
+
+---
+
+<Endpoint method="POST" path="/api/invoices/batch-submit" />
+
+Crear y enviar múltiples facturas en una sola petición.
+
+**Request:**
+```json
+{
+  "invoices": [
+    { /* factura 1 */ },
+    { /* factura 2 */ }
+  ],
+  "submit": true
+}
+```
+
+**Límites:**
+- Máximo 100 facturas por batch
+- Tamaño máximo del body: 10MB
+
+---
+
+### Gestión de Signers (Tenant)
+
+<Endpoint method="POST" path="/api/signers" />
+
+Crear un nuevo signer.
+
+```json
+{
+  "email": "contable@empresa.com",
+  "first_name": "María",
+  "last_name": "López García",
+  "phone": "+34612345678",
+  "role": "ACCOUNTANT"
+}
+```
+
+---
+
+<Endpoint method="GET" path="/api/signers" />
+
+Listar todos los signers del tenant.
+
+**Query params:**
+- `status` - Filtrar por estado (ACTIVE, PENDING, SUSPENDED)
+- `page` - Número de página (default: 0)
+- `size` - Tamaño de página (default: 20, max: 100)
+
+---
+
+<Endpoint method="GET" path="/api/signers/{signer-id}" />
+
+Obtener detalles de un signer específico.
+
+---
+
+### API Keys (Tenant)
+
+<Endpoint method="POST" path="/api/signers/{signer-id}/api-keys" />
+
+Crear una nueva API key para un signer.
+
+```json
+{
+  "name": "Producción ERP SAP",
+  "expires_in_days": 90
+}
+```
+
+**Response:**
+```json
+{
+  "id": "api-key-uuid",
+  "name": "Producción ERP SAP",
+  "fullKey": "factuio_sk_live_abc123...xyz789",
+  "keyPrefix": "factuio_sk_live_abc123",
+  "created_at": "2024-01-15T10:00:00Z",
+  "expires_at": "2024-04-15T10:00:00Z"
+}
+```
+
+<Callout kind="warning" title="⚠️ Importante">
+El campo <code>fullKey</code> solo se muestra una vez en la creación. Almacénalo de forma segura.
+</Callout>
+
+---
+
+<Endpoint method="DELETE" path="/api/signers/{signer-id}/api-keys/{key-id}" />
+
+Revocar una API key.
+
+---
+
+## Códigos de Respuesta
+
+| Código | Significado | Descripción |
+|--------|-------------|-------------|
+| `200` | OK | Petición exitosa |
+| `201` | Created | Recurso creado exitosamente |
+| `204` | No Content | Petición exitosa, sin contenido |
+| `400` | Bad Request | Datos de entrada inválidos |
+| `401` | Unauthorized | API key inválida o faltante |
+| `403` | Forbidden | Sin permisos para la operación |
+| `404` | Not Found | Recurso no encontrado |
+| `409` | Conflict | Conflicto de estado (ej: factura ya firmada) |
+| `422` | Unprocessable | Validación de negocio fallida |
+| `429` | Too Many Requests | Límite de rate excedido |
+| `500` | Server Error | Error interno del servidor |
+
+---
+
+## Manejo de Errores
+
+Todos los errores siguen el mismo formato:
+
+```json
+{
+  "error": {
+    "code": "INVALID_INVOICE_DATA",
+    "message": "Los datos de la factura no son válidos",
+    "details": [
+      {
+        "field": "customer.nif",
+        "message": "El NIF no tiene formato válido"
+      },
+      {
+        "field": "items[0].unit_price",
+        "message": "El precio debe ser mayor que 0"
+      }
+    ],
+    "request_id": "req_abc123xyz",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+```
+
+### Códigos de Error Comunes
+
+| Código | Descripción | Solución |
+|--------|-------------|----------|
+| `INVALID_NIF` | NIF/CIF inválido | Verificar formato correcto |
+| `DUPLICATE_INVOICE_NUMBER` | Número de factura duplicado | Usar numeración única |
+| `COMPANY_NOT_FOUND` | Empresa no encontrada | Verificar company_id |
+| `SIGNER_NOT_ACTIVE` | Signer no activo | Activar cuenta del signer |
+| `QUOTA_EXCEEDED` | Cuota excedida | Contactar soporte para ampliar |
+| `AEAT_UNAVAILABLE` | AEAT no disponible | Reintentar más tarde |
+
+---
+
+## Paginación
+
+Las listas paginadas incluyen metadatos:
+
+```json
+{
+  "data": [...],
+  "pagination": {
+    "page": 0,
+    "size": 20,
+    "total_elements": 150,
+    "total_pages": 8,
+    "has_next": true,
+    "has_previous": false
+  }
+}
+```
+
+**Headers de paginación:**
+```
+X-Total-Count: 150
+X-Page-Number: 0
+X-Page-Size: 20
+```
+
+---
+
+## Rate Limiting
+
+| Endpoint | Límite | Ventana |
+|----------|--------|---------|
+| Crear factura | 100 | 1 minuto |
+| Batch submit | 10 | 1 minuto |
+| Listados | 300 | 1 minuto |
+| Otras operaciones | 200 | 1 minuto |
+
+**Headers de rate limit:**
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1642256400
+```
+
+---
+
+## Webhooks
+
+### Configuración
+
+```json
+{
+  "url": "https://miempresa.com/webhooks/factuio",
+  "events": ["invoice.signed", "invoice.submitted"],
+  "secret": "whsec_mi_secreto",
+  "active": true
+}
+```
+
+### Verificación de Firma
+
+```python
+import hmac
+import hashlib
+
+def verify_webhook(payload, signature, secret):
+    expected = hmac.new(
+        secret.encode(),
+        payload.encode(),
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(f"sha256={expected}", signature)
+```
+
+---
+
+## Ejemplos de Integración
+
+### cURL
+
+```bash
+# Crear factura
+curl -X POST https://api.factuo.io/api/invoices/submit \
+  -H "Authorization: Bearer factuio_sk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "invoice": {
+      "company_id": "...",
+      "invoice_number": "FAC-001",
+      "customer": {
+        "name": "Cliente S.A.",
+        "nif": "A12345678"
+      },
+      "items": [{
+        "description": "Servicio",
+        "quantity": 1,
+        "unit_price": 100.00,
+        "vat_rate": 21
+      }]
+    },
+    "submit": true
+  }'
+```
+
+### JavaScript/Node.js
+
+```javascript
+const response = await fetch('https://api.factuo.io/api/invoices/submit', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer ' + API_KEY,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    invoice: {
+      company_id: companyId,
+      invoice_number: 'FAC-2024-001',
+      customer: {
+        name: 'Cliente Ejemplo',
+        nif: 'B12345678'
+      },
+      items: [{
+        description: 'Consultoría',
+        quantity: 1,
+        unit_price: 1000,
+        vat_rate: 21
+      }]
+    },
+    submit: true
+  })
+});
+
+const result = await response.json();
+console.log('Factura creada:', result.invoice.id);
+```
+
+### Python
+
+```python
+import requests
+
+headers = {
+    'Authorization': 'Bearer factuio_sk_live_...',
+    'Content-Type': 'application/json'
+}
+
+data = {
+    'invoice': {
+        'company_id': 'uuid-empresa',
+        'invoice_number': 'FAC-001',
+        'customer': {
+            'name': 'Cliente S.A.',
+            'nif': 'A12345678'
+        },
+        'items': [{
+            'description': 'Servicio',
+            'quantity': 1,
+            'unit_price': 100.00,
+            'vat_rate': 21
+        }]
+    },
+    'submit': True
+}
+
+response = requests.post(
+    'https://api.factuo.io/api/invoices/submit',
+    headers=headers,
+    json=data
+)
+
+result = response.json()
+print(f"Factura creada: {result['invoice']['id']}")
+```
+
+### Java
+
+```java
+HttpClient client = HttpClient.newHttpClient();
+
+String json = """
+    {
+        "invoice": {
+            "company_id": "uuid-empresa",
+            "invoice_number": "FAC-001",
+            "customer": {
+                "name": "Cliente S.A.",
+                "nif": "A12345678"
+            },
+            "items": [{
+                "description": "Servicio",
+                "quantity": 1,
+                "unit_price": 100.00,
+                "vat_rate": 21
+            }]
+        },
+        "submit": true
+    }
+    """;
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.factuo.io/api/invoices/submit"))
+    .header("Authorization", "Bearer " + apiKey)
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(json))
+    .build();
+
+HttpResponse<String> response = client.send(request, 
+    HttpResponse.BodyHandlers.ofString());
+
+System.out.println(response.body());
+```
+
+---
+
+## SDKs Oficiales
+
+| Lenguaje | Paquete | Repositorio |
+|----------|---------|--------------|
+| Node.js | `npm install @factuio/sdk` | [GitHub](https://github.com/bcntec/factuo-node-sdk) |
+| Python | `pip install factuo-sdk` | [GitHub](https://github.com/bcntec/factuo-python-sdk) |
+| Java | `com.bcntec:factuo-sdk:1.0.0` | [GitHub](https://github.com/bcntec/factuo-java-sdk) |
+| PHP | `composer require bcntec/factuo-sdk` | [GitHub](https://github.com/bcntec/factuo-php-sdk) |
+
+---
+
+## Soporte
+
+- 📧 Email: soporte@bcntec.es
+- 📖 Documentación: [https://bcntec.github.io/factuio-portal](https://bcntec.github.io/factuio-portal)
+- 🐛 Issues: [GitHub Issues](https://github.com/bcntec/factuo/issues)
+- 💬 Discord: [Unirse al servidor](https://discord.gg/factuo)
