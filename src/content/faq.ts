@@ -1,4 +1,4 @@
-export type FaqTag = "home" | "pricing" | "gestoria";
+export type FaqTag = "home" | "pricing" | "gestoria" | "historias";
 export interface FaqItem { q: string; a: string; tags: FaqTag[] }
 
 export const faq: FaqItem[] = [
@@ -10,10 +10,14 @@ export const faq: FaqItem[] = [
     a: "No. Puedes delegar la firma en FactuIO y emitir desde el primer día. Si tu gestoría firma por ti, también lo soportamos." },
   { q: "¿Qué pasa cuando termina la prueba gratuita?", tags: ["home", "pricing"],
     a: "Te avisamos antes de que acabe. Si no eliges plan, tu cuenta pasa a solo lectura: no perderás ninguna factura ni ningún dato." },
-  { q: "Soy una gestoría, ¿cómo añado a mis clientes?", tags: ["pricing", "gestoria"],
+  { q: "Soy una gestoría, ¿cómo añado a mis clientes?", tags: ["pricing", "gestoria", "historias"],
     a: "Cada cliente es una empresa dentro de tu cuenta, con sus usuarios y permisos. Tú ves todo el porfolio; ellos, solo lo suyo. La firma delegada te permite emitir en su nombre con su autorización AEAT." },
   { q: "¿Puedo pasar las facturas y gastos a mi programa de contabilidad?", tags: ["gestoria"],
     a: "Sí. FactuIO exporta el enlace contable de A3 (SUENLACE.DAT) para ventas y compras desde la propia ficha de la empresa." },
   { q: "¿Funciona en el País Vasco (TicketBAI)?", tags: ["home"],
     a: "Sí. FactuIO genera y encadena los ficheros TicketBAI para Bizkaia, Gipuzkoa y Araba con el mismo flujo que VERI*FACTU." },
+  { q: "¿Puedo empezar como autónomo y pasar a un plan con equipo más adelante?", tags: ["historias"],
+    a: "Sí. Cambias de plan desde tu cuenta y se aplica al siguiente ciclo. Tus facturas, contactos y gastos se quedan donde están." },
+  { q: "Mi gestoría ya usa FactuIO, ¿necesito mi propia cuenta?", tags: ["historias"],
+    a: "No. Tu gestoría te invita por email, entras con tu móvil y ves solo tu empresa. Subes tickets y facturas desde la app y tu gestor se encarga del resto, sin coste adicional para ti." },
 ];
