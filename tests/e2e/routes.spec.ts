@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
+const routes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
 
 for (const route of routes) {
   test(`${route} responds and has a single h1`, async ({ page }) => {

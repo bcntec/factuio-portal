@@ -35,8 +35,8 @@ export function SiteNav() {
     <nav className="sticky top-0 z-20 border-b border-border bg-card">
       <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-6">
         <Link href="/" className="bcn-wordmark text-xl text-navy">factu<span className="bracket">io</span></Link>
-        <div className="hidden items-center gap-6 md:flex">{links}{ctas}</div>
-        <details className="relative md:hidden" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}
+        <div className="hidden items-center gap-6 lg:flex">{links}{ctas}</div>
+        <details className="relative lg:hidden" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}
           onKeyDown={(e) => { if (e.key === "Escape") setOpen(false); }}>
           <summary className="list-none rounded-lg p-2 hover:bg-surface" aria-label={open ? site.mobileMenuCloseLabel : site.mobileMenuLabel} aria-expanded={open}><Menu size={22} aria-hidden="true" /></summary>
           {open && (

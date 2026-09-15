@@ -2,7 +2,7 @@ export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://bcntec.github.io${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
-export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
+export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
 
 export const site = {
   name: "FactuIO",
@@ -13,6 +13,8 @@ export const site = {
     { label: "Precios", href: "/precios/" },
     { label: "Gestorías", href: "/gestorias/" },
     { label: "Integraciones", href: "/integraciones/" },
+    { label: "VeriFactu", href: "/verifactu/" },
+    { label: "Historias", href: "/historias/" },
     { label: "Docs", href: "/docs/" },
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
@@ -37,6 +39,8 @@ export const site = {
         { label: "Integraciones", href: "/integraciones/" },
       ] },
       { title: "Recursos", links: [
+        { label: "VeriFactu", href: "/verifactu/" },
+        { label: "Historias de uso", href: "/historias/" },
         { label: "Documentación", href: "/docs/" },
         { label: "API", href: "/docs/api/" },
       ] },
