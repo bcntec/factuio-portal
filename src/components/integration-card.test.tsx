@@ -13,9 +13,10 @@ describe("IntegrationCard", () => {
   });
 
   it("maps every status to its Spanish label", () => {
-    render(<><IntegrationStatusPill status="available" /><IntegrationStatusPill status="beta" /><IntegrationStatusPill status="soon" /></>);
+    render(<><IntegrationStatusPill status="available" /><IntegrationStatusPill status="beta" /><IntegrationStatusPill status="soon" /><IntegrationStatusPill status="roadmap" /></>);
     expect(screen.getByText("Disponible")).toBeInTheDocument();
     expect(screen.getByText("En beta")).toBeInTheDocument();
     expect(screen.getByText("Próximamente")).toBeInTheDocument();
+    expect(screen.getByText("En roadmap")).toBeInTheDocument();
   });
 });

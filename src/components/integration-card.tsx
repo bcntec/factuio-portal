@@ -5,6 +5,7 @@ const statusTone: Record<IntegrationStatus, string> = {
   available: "bg-mint-pastel text-navy",
   beta: "bg-sky text-sky-ink",
   soon: "bg-peach text-peach-ink",
+  roadmap: "bg-surface-2 text-ink-3",
 };
 
 export function IntegrationStatusPill({ status }: { status: IntegrationStatus }) {
