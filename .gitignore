@@ -10,3 +10,4 @@ playwright-report/
 .idea/
 .vscode/
 .vercel
+.worktrees/
