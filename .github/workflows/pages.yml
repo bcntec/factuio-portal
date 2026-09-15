@@ -19,6 +19,10 @@ jobs:
         env: { NEXT_PUBLIC_APP_URL: "https://app.test", NEXT_PUBLIC_BASE_PATH: "" }
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - run: npm run build
+        env: { NEXT_PUBLIC_APP_URL: "https://app.test", NEXT_PUBLIC_BASE_PATH: "/factuio-portal" }
+      - run: npx playwright test tests/e2e/base-path.spec.ts
+        env: { PW_BASE_PATH: "/factuio-portal" }
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -36,6 +40,7 @@ jobs:
         env:
           NEXT_PUBLIC_APP_URL: ${{ vars.APP_URL }}
           NEXT_PUBLIC_BASE_PATH: ${{ vars.BASE_PATH }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with: { path: out }

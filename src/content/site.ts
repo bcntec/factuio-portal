@@ -1,7 +1,7 @@
 export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
-export const siteUrl = "https://bcntec.github.io/factuio-portal";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://bcntec.github.io${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
 export const siteRoutes = ["/", "/precios/", "/gestorias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/"];
 
 export const site = {

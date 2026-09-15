@@ -1,6 +1,17 @@
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import { Callout } from "@/components/callout";
 import { Endpoint } from "@/components/endpoint";
+
+const linkClassName = "font-semibold text-electric hover:underline";
+
+function MdxLink({ href, ...rest }: React.ComponentProps<"a">) {
+  if (href?.startsWith("/")) {
+    return <Link href={href} className={linkClassName} {...rest} />;
+  }
+  const isExternal = href?.startsWith("http://") || href?.startsWith("https://");
+  return <a href={href} className={linkClassName} rel={isExternal ? "noreferrer" : undefined} {...rest} />;
+}
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -10,7 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: (p) => <p className="my-3 text-[15px] leading-relaxed" {...p} />,
     ul: (p) => <ul className="my-3 list-disc pl-6 text-[15px]" {...p} />,
     ol: (p) => <ol className="my-3 list-decimal pl-6 text-[15px]" {...p} />,
-    a: (p) => <a className="font-semibold text-electric hover:underline" {...p} />,
+    a: MdxLink,
     table: (p) => <div className="my-5 overflow-x-auto rounded-xl border border-border"><table className="w-full text-sm" {...p} /></div>,
     th: (p) => <th className="bcn-label bg-surface p-3 text-left" {...p} />,
     td: (p) => <td className="border-t border-border p-3 align-top" {...p} />,
