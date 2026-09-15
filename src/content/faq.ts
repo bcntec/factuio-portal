@@ -1,9 +1,19 @@
-export type FaqTag = "home" | "pricing" | "gestoria";
+export type FaqTag = "home" | "pricing" | "gestoria" | "verifactu";
 export interface FaqItem { q: string; a: string; tags: FaqTag[] }
 
 export const faq: FaqItem[] = [
-  { q: "¿Qué es VERI*FACTU y por qué lo necesito?", tags: ["home", "pricing"],
+  { q: "¿Qué es VERI*FACTU y por qué lo necesito?", tags: ["home", "pricing", "verifactu"],
     a: "Es el sistema de la AEAT que obliga a que tus facturas se registren de forma verificable. Con FactuIO cada factura sale ya firmada, encadenada y con su QR, sin que tengas que hacer nada." },
+  { q: "¿Tengo que enviar cada factura a Hacienda al momento?", tags: ["verifactu"],
+    a: "Depende de la modalidad. En VERI*FACTU sí, se remite en el momento de facturar. En la modalidad no VERI*FACTU basta con conservar los registros íntegros y disponibles para que la AEAT pueda solicitarlos." },
+  { q: "¿Puedo seguir usando Excel o Word para facturar?", tags: ["verifactu"],
+    a: "No a partir de la fecha en que te obligue el calendario: los programas de facturación deben cumplir el RRSIF. Las facturas manuales en papel siguen permitidas en los casos que contempla la norma." },
+  { q: "¿Qué pasa con las facturas anteriores a 2027?", tags: ["verifactu"],
+    a: "No se regularizan retroactivamente. La obligación aplica a las facturas emitidas a partir de la fecha en que te corresponda cumplir." },
+  { q: "¿Necesito certificado digital para VERI*FACTU?", tags: ["verifactu"],
+    a: "No si delegas la firma en FactuIO: puedes emitir desde el primer día sin mover certificados." },
+  { q: "¿Qué diferencia hay entre VERI*FACTU y la factura electrónica de la Ley Crea y Crece?", tags: ["verifactu"],
+    a: "Son dos obligaciones distintas. VERI*FACTU regula cómo debe registrar y verificar tus facturas el software; la factura electrónica de la Ley Crea y Crece regula el formato de envío entre empresas y aún no tiene calendario definitivo." },
   { q: "¿Puedo cambiar de plan o cancelar cuando quiera?", tags: ["pricing"],
     a: "Sí. No hay permanencia: subes o bajas de plan desde tu cuenta y el cambio se aplica al siguiente ciclo. Si cancelas, conservas acceso de solo lectura a tus documentos." },
   { q: "¿Necesito certificado digital?", tags: ["home", "pricing"],
