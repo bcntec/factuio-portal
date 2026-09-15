@@ -1,4 +1,4 @@
-export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye";
+export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye" | "Link2" | "QrCode" | "Send" | "ShieldCheck" | "ScrollText";
 export interface Feature { icon: IconName; title: string; text: string }
 export interface Step { title: string; text: string }
 
