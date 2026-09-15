@@ -12,7 +12,9 @@ export const site = {
     { label: "Docs", href: "/docs/" },
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
+  mobileMenuLabel: "Abrir menú",
   footer: {
+    tagline: "Facturación VERI*FACTU para autónomos y gestorías.",
     columns: [
       { title: "Producto", links: [
         { label: "Funciones", href: "/#funciones" },

@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-[1120px] gap-8 px-6 py-12 md:grid-cols-4">
         <div>
           <p className="bcn-wordmark text-xl text-navy">factu<span className="bracket">io</span></p>
-          <p className="mt-2 text-sm text-muted-foreground">Facturación VERI*FACTU para autónomos y gestorías.</p>
+          <p className="mt-2 text-sm text-muted-foreground">{site.footer.tagline}</p>
         </div>
         {site.footer.columns.map((col) => (
           <div key={col.title}>
