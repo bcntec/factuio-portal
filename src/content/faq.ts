@@ -26,6 +26,8 @@ export const faq: FaqItem[] = [
     a: "Sí. FactuIO exporta el enlace contable de A3 (SUENLACE.DAT) para ventas y compras desde la propia ficha de la empresa." },
   { q: "¿Funciona en el País Vasco (TicketBAI)?", tags: ["home"],
     a: "Sí. FactuIO genera y encadena los ficheros TicketBAI para Bizkaia, Gipuzkoa y Araba con el mismo flujo que VERI*FACTU." },
+  { q: "¿FactuIO presenta mis impuestos por mí?", tags: ["home", "pricing", "gestoria"],
+    a: "FactuIO calcula el 303 y el 130 a partir de tus facturas y gastos, y genera el fichero oficial listo para subir a la Sede electrónica con tu certificado. El envío directo desde FactuIO y el modelo 390 anual están en camino." },
   { q: "¿Puedo empezar como autónomo y pasar a un plan con equipo más adelante?", tags: ["historias"],
     a: "Sí. Cambias de plan desde tu cuenta y se aplica al siguiente ciclo. Tus facturas, contactos y gastos se quedan donde están." },
   { q: "Mi gestoría ya usa FactuIO, ¿necesito mi propia cuenta?", tags: ["historias"],
