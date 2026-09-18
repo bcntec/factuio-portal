@@ -1,4 +1,4 @@
-export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye" | "Link2" | "QrCode" | "Send" | "ShieldCheck" | "ScrollText";
+export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye" | "Link2" | "QrCode" | "Send" | "ShieldCheck" | "ScrollText" | "Calculator" | "Sparkles";
 export interface Feature { icon: IconName; title: string; text: string }
 export interface Step { title: string; text: string }
 
@@ -27,10 +27,12 @@ export const home = {
   },
   features: [
     { icon: "FileCheck2", title: "Facturas VERI*FACTU y TicketBAI", text: "Firmadas, encadenadas y con QR. Enviadas a la AEAT o a la hacienda foral sin que hagas nada." },
+    { icon: "Calculator", title: "Modelos 303 y 130", text: "FactuIO calcula tus impuestos trimestrales a partir de tus facturas y gastos, y genera el fichero listo para la Sede." },
     { icon: "FileText", title: "Presupuestos y albaranes", text: "Convierte un presupuesto aceptado en factura en un clic. PDFs firmados con tu plantilla." },
     { icon: "Receipt", title: "Gastos con escaneo de tickets", text: "Haz una foto y FactuIO extrae proveedor, base e IVA. Tu IVA soportado siempre al día." },
     { icon: "Repeat", title: "Recurrentes y remesas SEPA", text: "Cuotas mensuales que se emiten solas y se cobran por domiciliación." },
     { icon: "Inbox", title: "Bandeja de entrada con IA", text: "Reenvía un email o un PDF y aparece como borrador listo para revisar." },
+    { icon: "Sparkles", title: "MAIAA, tu asistente", text: "Pídele por chat que te haga una factura, busque un gasto o te resuma el mes. Entiende tus datos y actúa por ti." },
     { icon: "Smartphone", title: "App móvil iOS y Android", text: "Emite, cobra y escanea gastos desde el móvil con la misma cuenta." },
   ] as Feature[],
   steps: [
@@ -41,8 +43,8 @@ export const home = {
   compliance: {
     eyebrow: "Cumplimiento",
     title: "Hecho para la normativa española",
-    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú.",
-    seals: ["VERI*FACTU", "TicketBAI", "RGPD", "Firma delegada (Anexo I)"] as string[],
+    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303 y 130 salen calculados de esas mismas facturas y gastos. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú.",
+    seals: ["VERI*FACTU", "TicketBAI", "Modelos 303 / 130", "RGPD", "Firma delegada (Anexo I)"] as string[],
   },
   gestoriasTeaser: {
     eyebrow: "Para gestorías",

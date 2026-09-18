@@ -10,6 +10,6 @@ describe("Faq", () => {
 
   it("uses native details/summary so it works without JS", () => {
     const { container } = render(<Faq tag="gestoria" />);
-    expect(container.querySelectorAll("details").length).toBe(2);
+    expect(container.querySelectorAll("details").length).toBe(3);
   });
 });
