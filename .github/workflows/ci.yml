@@ -1,0 +1,31 @@
+# CI del portal. El despliegue lo hace VERCEL (proyecto factuio-portal), no este workflow:
+# hasta el 2026-09-19 convivian los dos destinos para el mismo sitio y no habia forma de saber
+# cual era el bueno. Aqui solo se verifica; publicar es cosa de Vercel.
+#
+# Se conserva la doble comprobacion de build con y sin BASE_PATH: el portal es estatico
+# (output: "export") y servirlo bajo un subdirectorio rompe rutas si no se prueba.
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+permissions: { contents: read }
+concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+        env: { NEXT_PUBLIC_APP_URL: "https://app.test", NEXT_PUBLIC_BASE_PATH: "" }
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run build
+        env: { NEXT_PUBLIC_APP_URL: "https://app.test", NEXT_PUBLIC_BASE_PATH: "/factuio-portal" }
+      - run: npx playwright test tests/e2e/base-path.spec.ts
+        env: { PW_BASE_PATH: "/factuio-portal" }
