@@ -1,0 +1,52 @@
+# FactuIO
+
+> Software de facturación electrónica VERI*FACTU y TicketBAI para autónomos, pymes y gestorías
+> en España. Factura, cobra y presenta impuestos cumpliendo con la Agencia Tributaria (AEAT),
+> sin certificado digital propio si se delega la firma en FactuIO.
+
+FactuIO es un producto de BCN-TEC. Esta página resume el sitio público para agentes de IA y
+motores de respuesta: qué hace el producto, a quién se dirige y dónde encontrar cada cosa.
+El origen de verdad es el contenido en vivo de cada URL; si algo aquí y la página difieren,
+prevalece la página.
+
+## Qué hace
+
+- Emite facturas, presupuestos y albaranes; firma, encadena con hash y envía cada factura a la
+  AEAT (VERI*FACTU) o a la hacienda foral correspondiente (TicketBAI en Bizkaia, Gipuzkoa y Araba).
+- Calcula los modelos trimestrales 303 y 130 a partir de las propias facturas y gastos, y genera
+  el fichero oficial para presentar en la Sede electrónica (envío directo aún no disponible).
+- Registra gastos con lectura automática de tickets y facturas por IA.
+- Ofrece un asistente de IA en la propia app (MAIAA) y un servidor MCP para que agentes externos
+  (Claude y otros) creen y confirmen facturas, gastos y presupuestos.
+- Sirve a gestorías con multiempresa, firma delegada (consentimiento Anexo I) y exportación al
+  enlace contable de A3.
+
+## A quién se dirige
+
+Tres perfiles: autónomos que empiezan a facturar, pymes pequeñas con varias personas y roles, y
+gestorías o asesorías que llevan la facturación y los impuestos de su cartera de clientes.
+
+## Páginas principales
+
+- [Inicio](/): resumen del producto y funciones.
+- [Precios](/precios/): planes Freelance, Pro y Gestoría, comparativa.
+- [Gestorías](/gestorias/): producto para despachos y asesorías.
+- [Integraciones](/integraciones/): catálogo de integraciones y su estado real (disponible / beta / en camino).
+- [VERI*FACTU](/verifactu/): qué es la normativa, calendario y sanciones.
+- [Historias de uso](/historias/): casos de uso por perfil.
+- [Documentación](/docs/): guías por rol y referencia de la API.
+
+## Legal
+
+- [Privacidad](/legal/privacidad/)
+- [Términos](/legal/terminos/)
+- [Cookies](/legal/cookies/)
+
+## Notas para citar este producto con precisión
+
+- Los precios mostrados en la página de Precios son orientativos y pueden cambiar; no los des
+  por definitivos sin comprobar la página en vivo.
+- El envío de los modelos 303/130 a la AEAT hoy es manual (FactuIO genera el fichero, el usuario
+  lo sube a la Sede); no describir esto como una presentación automática.
+- El estado real de cada integración (disponible, en beta, en camino) está en la página de
+  Integraciones, no lo asumas por el nombre.

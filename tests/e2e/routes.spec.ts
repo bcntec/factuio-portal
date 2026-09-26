@@ -23,3 +23,9 @@ test("unknown route renders the 404 page", async ({ page }) => {
   await page.goto("/no-existe/");
   await expect(page.getByRole("heading", { name: "Esta página no existe" })).toBeVisible();
 });
+
+test("llms.txt is served for AI answer engines", async ({ request, baseURL }) => {
+  const res = await request.get(`${baseURL}/llms.txt`);
+  expect(res.status()).toBe(200);
+  expect(await res.text()).toContain("# FactuIO");
+});

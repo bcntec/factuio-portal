@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
+import { ProductJsonLd } from "@/components/product-jsonld";
 import { FeatureGrid } from "@/components/feature-grid";
 import { Steps } from "@/components/steps";
 import { ComplianceBand } from "@/components/compliance-band";
@@ -14,6 +15,7 @@ import { appUrl } from "@/lib/links";
 export default function HomePage() {
   return (
     <main>
+      <ProductJsonLd />
       <Hero />
       <section id="funciones" className="mx-auto max-w-[1120px] scroll-mt-20 px-6 py-16">
         <SectionHeading eyebrow={home.sections.features.eyebrow} title={home.sections.features.title} sub={home.sections.features.sub} />
