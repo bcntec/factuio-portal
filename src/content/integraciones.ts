@@ -71,7 +71,7 @@ export const integraciones = {
     { id: "ai", title: "IA y automatización", text: "Para conectar FactuIO con tus sistemas o con tus agentes.", items: [
       { id: "ocr", name: "Lectura de facturas con IA", vendor: "Foto o PDF", mark: "IA", status: "available", text: "Rellena un gasto o una factura a partir de una imagen." },
       { id: "maia", name: "MAIA", vendor: "Asistente", mark: "M", status: "available", text: "Consulta y actúa sobre facturas, gastos y empresas en lenguaje natural." },
-      { id: "mcp", name: "Servidor MCP", vendor: "Claude y otros agentes", mark: "MCP", status: "available", text: "Tus agentes de IA operan FactuIO con herramientas y OAuth." },
+      { id: "mcp", name: "Servidor MCP", vendor: "Claude y otros agentes", mark: "MCP", status: "available", text: "Tu agente de IA crea, edita y confirma facturas, gastos y presupuestos, con tu aprobación explícita antes de escribir nada." },
       { id: "api", name: "API REST", vendor: "API keys", mark: "API", status: "available", text: "Integra tu propio sistema con una API documentada en OpenAPI." },
       { id: "webhooks", name: "Webhooks", vendor: "Firmados con HMAC", mark: "WH", status: "available", text: "Avisa a tus sistemas cuando se emite, se envía o se cobra una factura." },
       { id: "zapier", name: "Zapier, Make y n8n", vendor: "Automatización sin código", mark: "Zp", status: "roadmap", text: "Conecta FactuIO con miles de apps sin programar." },
@@ -90,7 +90,7 @@ export const integraciones = {
   developers: {
     eyebrow: "Para desarrolladores",
     title: "Constrúyelo tú mismo sobre FactuIO",
-    bullets: ["API REST con API keys y especificación OpenAPI", "Webhooks firmados: factura emitida, envío completado, cobro recibido", "Servidor MCP para que tus agentes de IA trabajen con tus datos"],
+    bullets: ["API REST con API keys y especificación OpenAPI", "Webhooks firmados: factura emitida, envío completado, cobro recibido", "Servidor MCP con un extenso catálogo de herramientas: crear, editar y confirmar sobre casi todo lo que expone la API"],
     cta: { label: "Ver la documentación de la API", href: "/docs/api/" },
   },
   missing: {
