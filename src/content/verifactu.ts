@@ -82,6 +82,11 @@ export const verifactu = {
     title: "¿Y TicketBAI?",
     text: "En Bizkaia, Gipuzkoa y Araba no se aplica VERI*FACTU sino TicketBAI, el sistema equivalente de las haciendas forales. FactuIO genera y encadena los ficheros TicketBAI con el mismo flujo que usa para VERI*FACTU.",
   },
+  einvoice: {
+    eyebrow: "Lo que viene",
+    title: "¿Y la factura electrónica B2B?",
+    text: "La Ley Crea y Crece obligará a enviar en formato electrónico las facturas entre empresas cuando se publiquen su reglamento y su calendario. Es una obligación distinta de VERI*FACTU. FactuIO ya genera tus facturas en formato Facturae; incorporaremos el envío electrónico cuando se publique el reglamento.",
+  },
   faq: {
     eyebrow: "FAQ",
     title: "Preguntas sobre VERI*FACTU",

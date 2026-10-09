@@ -105,6 +105,10 @@ export default function VerifactuPage() {
       </section>
 
       <section className="mx-auto max-w-[1120px] px-6 py-16">
+        <SectionHeading eyebrow={v.einvoice.eyebrow} title={v.einvoice.title} sub={v.einvoice.text} />
+      </section>
+
+      <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={v.faq.eyebrow} title={v.faq.title} />
         <Faq tag="verifactu" />
       </section>

@@ -13,7 +13,7 @@ export const faq: FaqItem[] = [
   { q: "¿Necesito certificado digital para VERI*FACTU?", tags: ["verifactu"],
     a: "No si delegas la firma en FactuIO: puedes emitir desde el primer día sin mover certificados." },
   { q: "¿Qué diferencia hay entre VERI*FACTU y la factura electrónica de la Ley Crea y Crece?", tags: ["verifactu"],
-    a: "Son dos obligaciones distintas. VERI*FACTU regula cómo debe registrar y verificar tus facturas el software; la factura electrónica de la Ley Crea y Crece regula el formato de envío entre empresas y aún no tiene calendario definitivo." },
+    a: "Son dos obligaciones distintas. VERI*FACTU regula cómo debe registrar y verificar tus facturas el software; la factura electrónica de la Ley Crea y Crece regula el formato de envío entre empresas y aún no tiene calendario definitivo. FactuIO ya genera Facturae." },
   { q: "¿Puedo cambiar de plan o cancelar cuando quiera?", tags: ["pricing"],
     a: "Sí. No hay permanencia: subes o bajas de plan desde tu cuenta y el cambio se aplica al siguiente ciclo. Si cancelas, conservas acceso de solo lectura a tus documentos." },
   { q: "¿Necesito certificado digital?", tags: ["home", "pricing"],

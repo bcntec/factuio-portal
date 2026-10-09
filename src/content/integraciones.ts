@@ -29,8 +29,8 @@ export const integraciones = {
       { id: "vnif", name: "VNIF", vendor: "Agencia Tributaria", mark: "VN", status: "available", text: "Comprueba el NIF y el nombre de tus clientes contra el censo." },
       { id: "tax-models", name: "Modelos 303 / 130 / 390", vendor: "Agencia Tributaria", mark: "303", status: "available", text: "Calcula el 303 y el 130 y genera el fichero oficial listo para subir a la Sede. Envío directo y el 390 anual, próximamente." },
       { id: "sii", name: "SII", vendor: "Agencia Tributaria", mark: "SII", status: "roadmap", text: "Libros de IVA en tiempo real para grandes empresas y REDEME." },
-      { id: "facturae", name: "Facturae y FACe", vendor: "Administración pública", mark: "Fe", status: "roadmap", text: "Factura electrónica a las administraciones públicas." },
-      { id: "einvoice-b2b", name: "Factura electrónica B2B", vendor: "Ley Crea y Crece", mark: "B2B", status: "roadmap", text: "Facturación electrónica entre empresas cuando entre en vigor el reglamento." },
+      { id: "facturae", name: "Facturae y FACe", vendor: "Administración pública", mark: "Fe", status: "available", text: "Genera tus facturas en Facturae 3.2.2. Envío a las administraciones públicas (FACe), próximamente." },
+      { id: "einvoice-b2b", name: "Factura electrónica B2B", vendor: "Ley Crea y Crece", mark: "B2B", status: "roadmap", text: "Envío electrónico entre empresas cuando se publique el reglamento de la Ley Crea y Crece. Tus facturas ya salen en Facturae." },
       { id: "clave", name: "Cl@ve", vendor: "Administración General del Estado", mark: "C@", status: "roadmap", text: "Presenta sin certificado, con Cl@ve PIN o permanente." },
     ] },
     { id: "accounting", title: "Gestoría y contabilidad", text: "Tu gestor recibe los datos en su programa y liquida desde allí.", items: [

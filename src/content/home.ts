@@ -43,7 +43,7 @@ export const home = {
   compliance: {
     eyebrow: "Cumplimiento",
     title: "Hecho para la normativa española",
-    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303 y 130 salen calculados de esas mismas facturas y gastos. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú.",
+    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303 y 130 salen calculados de esas mismas facturas y gastos. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú. Y cuando llegue la factura electrónica entre empresas, tus facturas ya salen en Facturae.",
     seals: ["VERI*FACTU", "TicketBAI", "Modelos 303 / 130", "RGPD", "Firma delegada (Anexo I)"] as string[],
   },
   gestoriasTeaser: {
