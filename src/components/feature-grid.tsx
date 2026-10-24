@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as icons from "lucide-react";
 import type { Feature } from "@/content/home";
 
@@ -11,6 +12,7 @@ export function FeatureGrid({ features }: { features: readonly Feature[] }) {
             <span className="mb-4 grid size-11 place-items-center rounded-lg bg-mint-tint text-electric"><Icon size={22} aria-hidden="true" /></span>
             <h3 className="text-lg text-navy">{f.title}</h3>
             <p className="mt-2 text-[15px] text-muted-foreground">{f.text}</p>
+            {f.link && <Link href={f.link.href} className="mt-3 inline-block text-sm font-semibold text-electric hover:underline">{f.link.label}</Link>}
           </article>
         );
       })}

@@ -47,7 +47,7 @@ export const verifactu = {
       { icon: "QrCode", title: "QR con URL de verificación de la AEAT", text: "La factura lleva un código QR con la URL de verificación de la AEAT y la leyenda VERI*FACTU." },
       { icon: "Send", title: "Envío inmediato a la AEAT", text: "En la modalidad VERI*FACTU, los registros se remiten a la AEAT en el momento de facturar." },
       { icon: "ShieldCheck", title: "Registro de eventos e inalterabilidad", text: "El sistema guarda un registro de eventos y garantiza integridad, conservación, accesibilidad, legibilidad y trazabilidad." },
-      { icon: "FileText", title: "Declaración responsable del fabricante", text: "El proveedor del software firma una declaración responsable de que cumple el reglamento." },
+      { icon: "FileText", title: "Declaración responsable del fabricante", text: "El proveedor del software firma una declaración responsable de que cumple el reglamento.", link: { href: "/declaracion-responsable/", label: "Ver la declaración responsable de FactuIO" } },
     ] as Feature[],
   },
   how: {
