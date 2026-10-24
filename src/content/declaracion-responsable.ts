@@ -14,10 +14,16 @@ export interface Declaration {
   annex: DeclarationSection[];
   text: string;
   text_file: string;
-  /** Identity the AEAT XML SistemaInformatico block carries for this version. */
-  system?: { name: string; id_code: string; verifactu_only: string; multiple_taxpayers: string };
-  /** How the VERI*FACTU conformance gate ran when this version was certified. */
-  gate?: { mode: string; command: string | null; test_classes: string[] };
+  /** Identity the AEAT XML SistemaInformatico block carries for this version (producer = 1.h/1.i). */
+  system?: {
+    name: string; id_code: string; verifactu_only: string; multiple_taxpayers: string;
+    producer?: { name: string; nif: string | null; id_otro: { country_code: string; id_type: string; id: string } | null };
+  };
+  /**
+   * Public summary of the VERI*FACTU conformance gate for this version: whether the Maven gate
+   * passed, the version and the date. The raw gate (command, classes) is never published here.
+   */
+  gate?: { passed: boolean; version: string; date: string };
 }
 export interface DeclarationBundle { schema_version: number; current: string | null; versions: Declaration[] }
 
