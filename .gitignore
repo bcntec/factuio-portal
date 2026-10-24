@@ -11,3 +11,6 @@ playwright-report/
 .vscode/
 .vercel
 .worktrees/
+
+# git worktrees
+.worktrees/
