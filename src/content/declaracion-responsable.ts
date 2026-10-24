@@ -14,6 +14,10 @@ export interface Declaration {
   annex: DeclarationSection[];
   text: string;
   text_file: string;
+  /** Identity the AEAT XML SistemaInformatico block carries for this version. */
+  system?: { name: string; id_code: string; verifactu_only: string; multiple_taxpayers: string };
+  /** How the VERI*FACTU conformance gate ran when this version was certified. */
+  gate?: { mode: string; command: string | null; test_classes: string[] };
 }
 export interface DeclarationBundle { schema_version: number; current: string | null; versions: Declaration[] }
 
