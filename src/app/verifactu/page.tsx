@@ -85,7 +85,7 @@ export default function VerifactuPage() {
 
       <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={v.penalties.eyebrow} title={v.penalties.title} sub={v.penalties.text} />
-        <div className="mx-auto grid max-w-2xl gap-5 sm:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl gap-5 sm:grid-cols-3">
           {v.penalties.figures.map((f) => (
             <div key={f.amount} className="rounded-xl border border-navy bg-navy p-7 text-center text-white brutal-shadow-lg">
               <p className="bcn-num text-4xl font-bold">{f.amount}</p>

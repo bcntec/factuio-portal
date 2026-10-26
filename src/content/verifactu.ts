@@ -70,10 +70,11 @@ export const verifactu = {
   penalties: {
     eyebrow: "Sanciones",
     title: "Qué pasa si no cumples",
-    text: "El artículo 201 bis de la Ley General Tributaria tipifica como infracción tributaria fabricar, producir, comercializar o usar programas informáticos que no cumplan el reglamento, o que permitan llevar contabilidades distintas, alterar registros ya enviados o no dejar rastro de las alteraciones.",
+    text: "El artículo 201 bis de la Ley General Tributaria sanciona fabricar, producir o comercializar software de facturación que permita llevar contabilidades distintas, ocultar o alterar transacciones ya registradas, o que no garantice la integridad, trazabilidad e inalterabilidad de los registros. También sanciona tener software no certificado (o alterado) cuando debe estarlo.",
     figures: [
-      { amount: "50.000 €", label: "por ejercicio, para quien use software no conforme" },
-      { amount: "150.000 €", label: "por ejercicio y tipo de software, para quien lo fabrique o venda" },
+      { amount: "50.000 €", label: "por ejercicio, por tener software no certificado debiendo estarlo, o alterado" },
+      { amount: "150.000 €", label: "por ejercicio con ventas y por cada tipo de software, para quien lo fabrique o comercialice" },
+      { amount: "1.000 €", label: "por cada sistema comercializado sin su certificación (declaración responsable)" },
     ] as { amount: string; label: string }[],
     note: "Artículo 201 bis de la Ley General Tributaria.",
   },
