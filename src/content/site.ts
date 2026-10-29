@@ -2,7 +2,7 @@ export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://bcntec.github.io${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
-export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/"];
+export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/docs/modelo-390-con-ia/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/"];
 
 export const site = {
   name: "FactuIO",
