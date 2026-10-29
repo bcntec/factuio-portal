@@ -1,0 +1,100 @@
+export const metadata = { title: "Modelo 390 con ayuda de una IA", description: "Cómo preparar el resumen anual de IVA (modelo 390) con ayuda de una IA cuando no tienes los cuatro 303 del año en FactuIO." };
+
+# Modelo 390 con ayuda de una IA
+
+El modelo 390 es el resumen anual del IVA. FactuIO lo calcula por ti cuando tiene los cuatro modelos 303 del ejercicio marcados como presentados. Esta guía es para el resto de casos: cuando falta alguno, una IA puede ayudarte a **preparar y entender** las cifras. Presentar el modelo sigue siendo cosa tuya.
+
+---
+
+## Cuándo hace falta esta guía
+
+- Empezaste a usar FactuIO a mitad de año y los primeros trimestres los presentaste en otro sitio.
+- Presentaste uno o varios trimestres fuera de FactuIO (en la Sede de la AEAT, con tu gestor o con otro programa).
+- Por cualquier otro motivo, FactuIO no tiene los cuatro 303 del año marcados como presentados.
+
+<Callout kind="info" title="Qué hace FactuIO por su cuenta">
+
+FactuIO calcula el 390 solo cuando los cuatro 303 del año están marcados como presentados (presentados desde FactuIO o marcados como presentados a mano). Por ahora solo está disponible el diseño de registro de 2025; para otros ejercicios, el 390 no está disponible. Antes de presentarlo te pide que indiques si presentas el modelo 347, y, si eres una sociedad (persona jurídica), el NIF y el nombre de tu representante legal. También tienes que rellenar la clave de actividad y el epígrafe del IAE, y deben ser coherentes entre sí.
+
+</Callout>
+
+---
+
+## Qué juntar antes de empezar
+
+1. Los PDF o justificantes de los 303 que presentaste fuera de FactuIO.
+2. Los 303 que exporta FactuIO, para los trimestres que sí presentaste con nosotros.
+3. Si puedes, el detalle de lo que declaraste (bases, cuotas y resultado de cada trimestre).
+
+---
+
+## Cuatro prompts para empezar
+
+Son genéricos: valen para ChatGPT, Claude o MAiaa. Pega el texto de tus 303 donde indica cada prompt.
+
+### 1. Extraer las casillas de cada 303
+
+```text
+Te paso el contenido de cuatro modelos 303 (uno por trimestre) de un mismo ejercicio.
+Para cada uno, extrae el número de casilla, su descripción y su importe, y devuélvelo
+como una tabla con las columnas: trimestre, casilla, descripción, importe.
+Si una casilla no aparece o no se lee bien, márcala como "no encontrada"; no inventes valores.
+
+[Pega aquí el contenido de los 303]
+```
+
+### 2. Sumar y proponer las casillas del 390
+
+```text
+Con la tabla anterior, suma por casilla los importes de los cuatro trimestres y propón
+a qué casilla del modelo 390 corresponde cada total. Para cada propuesta indica:
+casilla del 390, importe, y qué casillas de los 303 has sumado. Si no estás seguro de
+la correspondencia, dilo explícitamente en lugar de suponerla.
+```
+
+### 3. Cuadrar el 390 con los 303
+
+```text
+Compara los totales que has propuesto para el 390 con la suma de los cuatro 303.
+Lista todas las diferencias, aunque sean de céntimos, con el importe de cada lado y
+una posible explicación (redondeos, una casilla mal asignada, un trimestre que falta).
+Si todo cuadra, dímelo y enséñame la comprobación.
+```
+
+### 4. Revisar incoherencias
+
+```text
+Revisa los cuatro 303 y el borrador del 390 buscando incoherencias: trimestres que
+faltan o están duplicados, compensaciones de cuotas de periodos anteriores que no
+encajan, cambios de tipo impositivo entre trimestres, importes negativos inesperados
+o casillas con valores a cero que deberían tener importe. Para cada hallazgo, indica
+dónde está y qué dato habría que comprobar en los justificantes.
+```
+
+---
+
+## Cómo revisar el resultado
+
+- Comprueba cada casilla contra los PDF o justificantes originales, no contra lo que dice la IA.
+- Verifica que los cuatro trimestres están incluidos una sola vez.
+- Confirma que el total de cuotas y bases del 390 coincide con la suma de los 303.
+- Revisa los datos propios del 390 que no salen de los 303: volumen de operaciones, actividad (clave y epígrafe del IAE) y, si eres sociedad, representante legal.
+- Ante cualquier diferencia que no sepas explicar, consúltala con tu gestor antes de seguir.
+
+---
+
+## Dónde presentarlo
+
+Puedes presentar el modelo 390 en la Sede electrónica de la AEAT, en el apartado del modelo 390: [Sede electrónica de la AEAT](https://sede.agenciatributaria.gob.es/). La presentación se hace «en nombre propio», con el certificado digital de la propia empresa.
+
+<Callout kind="info" title="Qué puede hacer la IA y qué no">
+
+Las herramientas de IA conectadas a FactuIO (MCP y MAiaa) pueden ayudarte a preparar y a explicar las cifras, pero nunca presentan un modelo por ti: la presentación siempre la confirmas tú.
+
+</Callout>
+
+<Callout kind="warning" title="La responsabilidad es tuya">
+
+La responsabilidad de lo que se presenta es de la empresa. Conviene revisarlo con tu gestor. La IA puede equivocarse, así que no des por buena ninguna cifra sin contrastarla con tus justificantes. Además, no subas datos que no quieras compartir con ese servicio.
+
+</Callout>
