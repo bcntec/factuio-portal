@@ -99,6 +99,7 @@ export const historias = {
         "Cada cliente es una empresa dentro de la cuenta del despacho, con sus propios usuarios y permisos.",
         "El cliente firma la autorización (Anexo I) y el despacho emite y presenta en su nombre. Sin mover certificados.",
         "Ventas y compras se exportan al enlace contable de A3 desde la ficha de cada empresa.",
+        "Los modelos 303, 130 y 390 los presenta el despacho directamente en la AEAT, con la autorización del cliente.",
       ],
       modules: ["Multiempresa", "Firma delegada con Anexo I", "Exportación A3", "Portal de cliente"],
       plan: "gestoria",

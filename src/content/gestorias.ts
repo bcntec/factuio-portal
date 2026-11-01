@@ -21,12 +21,12 @@ export const gestorias = {
     { icon: "Share2", title: "Exportación al enlace contable de A3", text: "Ventas y compras en formato SUENLACE.DAT listas para a3ASESOR, a3eco y a3con." },
     { icon: "Users", title: "Portal de cliente y API", text: "Tus clientes suben tickets y facturas recibidas desde su portal o su móvil; tú lo recibes ordenado." },
     { icon: "Eye", title: "Visibilidad de todo el porfolio", text: "Qué facturas faltan por presentar, qué gastos por revisar y qué autorizaciones caducan." },
-    { icon: "Calculator", title: "Modelos 303 y 130 de toda la cartera", text: "Una bandeja con los modelos de cada cliente, calculados desde sus facturas y gastos, listos para presentar." },
+    { icon: "Calculator", title: "Modelos 303, 130 y 390 de toda la cartera", text: "Una bandeja con los modelos de cada cliente, calculados desde sus facturas y gastos, que presentas en su nombre con su autorización." },
   ] as Feature[],
   steps: [
     { title: "Invita a tu cliente", text: "Recibe un email, entra con su móvil y ve solo su empresa." },
     { title: "Firma la autorización", text: "Acepta el Anexo I desde su cuenta. Queda registrado con fecha y evidencia." },
-    { title: "Emite y presenta en su nombre", text: "Facturas, gastos y modelos trimestrales desde tu panel." },
+    { title: "Emite y presenta en su nombre", text: "Facturas, gastos y modelos trimestrales desde tu panel, con conciliación por extracto e importador CSV para migrar a tus clientes." },
   ] as Step[],
   sections: {
     benefits: { eyebrow: "Ventajas", title: "Pensado para llevar muchas empresas" },

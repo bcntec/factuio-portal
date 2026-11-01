@@ -27,10 +27,10 @@ export const home = {
   },
   features: [
     { icon: "FileCheck2", title: "Facturas VERI*FACTU y TicketBAI", text: "Firmadas, encadenadas y con QR. Enviadas a la AEAT o a la hacienda foral sin que hagas nada." },
-    { icon: "Calculator", title: "Modelos 303 y 130", text: "FactuIO calcula tus impuestos trimestrales a partir de tus facturas y gastos, y genera el fichero listo para la Sede." },
+    { icon: "Calculator", title: "Modelos 303, 130 y 390", text: "FactuIO calcula tus impuestos a partir de tus facturas y gastos y los presenta directamente a la AEAT, en nombre propio." },
     { icon: "FileText", title: "Presupuestos y albaranes", text: "Convierte un presupuesto aceptado en factura en un clic. PDFs firmados con tu plantilla." },
     { icon: "Receipt", title: "Gastos con escaneo de tickets", text: "Haz una foto y FactuIO extrae proveedor, base e IVA. Tu IVA soportado siempre al día." },
-    { icon: "Repeat", title: "Recurrentes y remesas SEPA", text: "Cuotas mensuales que se emiten solas y se cobran por domiciliación." },
+    { icon: "Repeat", title: "Recurrentes, cobros y conciliación", text: "Cuotas y gastos recurrentes con alertas, enlace de pago por correo, SMS o WhatsApp, devoluciones y conciliación del extracto bancario." },
     { icon: "Inbox", title: "Bandeja de entrada con IA", text: "Reenvía un email o un PDF y aparece como borrador listo para revisar." },
     { icon: "Sparkles", title: "MAIAA, tu asistente", text: "Pídele por chat que te haga una factura, busque un gasto o te resuma el mes. Entiende tus datos y actúa por ti." },
     { icon: "Smartphone", title: "App móvil iOS y Android", text: "Emite, cobra y escanea gastos desde el móvil con la misma cuenta." },
@@ -38,13 +38,13 @@ export const home = {
   steps: [
     { title: "Regístrate con tu móvil", text: "Un código por SMS o email. Sin contraseñas que recordar." },
     { title: "Crea tu empresa y autoriza a FactuIO", text: "NIF, datos fiscales y la autorización para presentar tus facturas ante la AEAT." },
-    { title: "Emite tu primera factura", text: "Con QR, firma y envío automático. Cóbrala online o por SEPA." },
+    { title: "Emite tu primera factura", text: "Con QR, firma y envío automático. Cóbrala con un enlace de pago, con tarjeta o Bizum." },
   ] as Step[],
   compliance: {
     eyebrow: "Cumplimiento",
     title: "Hecho para la normativa española",
-    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303 y 130 salen calculados de esas mismas facturas y gastos. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú. Y cuando llegue la factura electrónica entre empresas, tus facturas ya salen en Facturae.",
-    seals: ["VERI*FACTU", "TicketBAI", "Modelos 303 / 130", "RGPD", "Firma delegada (Anexo I)"] as string[],
+    text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303, 130 y 390 salen calculados de esas mismas facturas y gastos, con presentación directa a la AEAT. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú. Tus facturas ya salen en Facturae y puedes enviarlas a la administración pública por FACe; cuando llegue la factura electrónica entre empresas, ya estarás listo.",
+    seals: ["VERI*FACTU", "TicketBAI", "Modelos 303 / 130 / 390", "RGPD", "Firma delegada (Anexo I)"] as string[],
   },
   gestoriasTeaser: {
     eyebrow: "Para gestorías",

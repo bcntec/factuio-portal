@@ -86,7 +86,7 @@ export const verifactu = {
   einvoice: {
     eyebrow: "Lo que viene",
     title: "¿Y la factura electrónica B2B?",
-    text: "La Ley Crea y Crece obligará a enviar en formato electrónico las facturas entre empresas cuando se publiquen su reglamento y su calendario. Es una obligación distinta de VERI*FACTU. FactuIO ya genera tus facturas en formato Facturae; incorporaremos el envío electrónico cuando se publique el reglamento.",
+    text: "La Ley Crea y Crece obligará a enviar en formato electrónico las facturas entre empresas cuando se publiquen su reglamento y su calendario. Es una obligación distinta de VERI*FACTU. FactuIO ya genera tus facturas en Facturae 3.2.2 y las envía a las administraciones públicas por FACe (operativo frente al entorno de pruebas; alta en producción en trámite). El envío entre empresas lo incorporaremos cuando se publique el reglamento.",
   },
   faq: {
     eyebrow: "FAQ",

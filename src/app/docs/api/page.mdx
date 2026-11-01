@@ -29,7 +29,7 @@ La API de FactuIO permite integrar la funcionalidad de facturación verificada e
 Todas las peticiones deben incluir la API key en el header `Authorization`:
 
 ```bash
-curl -H "Authorization: Bearer factuio_sk_live_..." \
+curl -H "Authorization: Bearer fio_..." \
      https://api.factuo.io/v1/invoices
 ```
 
@@ -37,10 +37,29 @@ curl -H "Authorization: Bearer factuio_sk_live_..." \
 
 | Tipo | Prefijo | Uso |
 |------|---------|-----|
-| Tenant Live | `factuio_tk_live_` | Administración de tenant |
-| Tenant Test | `factuio_tk_test_` | Pruebas de administración |
-| Signer Live | `factuio_sk_live_` | Operaciones de facturación |
-| Signer Test | `factuio_sk_test_` | Pruebas de facturación |
+| Integración unificada | `fio_` | Clave de la empresa para integrar tu sistema. Solo lectura por defecto; con «Permitir escritura» accede a un conjunto cerrado de endpoints |
+| Clásica | `fu_` | Solo lectura |
+| MCP personal | `pat_` | Conectar un agente de IA por MCP con tu usuario |
+
+### Permiso de escritura
+
+Las claves de integración (`fio_`) son de **solo lectura por defecto**. En **API keys** activa el interruptor «Permitir escritura» para habilitar un conjunto cerrado de 27 endpoints: facturas, presupuestos, albaranes, gastos, clientes, envíos por correo, solicitudes de cobro, importador y webhooks. El resto de operaciones (por ejemplo, enviar a la AEAT o firmar un PDF) están denegadas para las claves. Las acciones quedan auditadas con la clave como autor.
+
+| Código de error | Cuándo |
+|-----------------|--------|
+| `API_KEY_READ_ONLY` | Escritura con una clave sin «Permitir escritura» |
+| `API_KEY_WRITE_NOT_ALLOWED_HERE` | Endpoint no incluido en el conjunto permitido para claves |
+
+### Idempotency-Key
+
+En los `POST` que crean o envían (facturas, envíos, solicitudes de cobro y similares) puedes enviar la cabecera `Idempotency-Key` con un valor único por operación. Si reintentas la misma petición con la misma clave, no se duplica el recurso.
+
+```bash
+curl -X POST -H "Authorization: Bearer fio_..." \
+     -H "Idempotency-Key: 6f1c2a9e-0b7d-4d3a-9c55-1a2b3c4d5e6f" \
+     -H "Content-Type: application/json" -d '{...}' \
+     https://api.factuo.io/v1/invoices
+```
 
 ---
 
@@ -186,8 +205,8 @@ Crear una nueva API key para un signer.
 {
   "id": "api-key-uuid",
   "name": "Producción ERP SAP",
-  "fullKey": "factuio_sk_live_abc123...xyz789",
-  "keyPrefix": "factuio_sk_live_abc123",
+  "fullKey": "fio_abc123...xyz789",
+  "keyPrefix": "fio_abc123",
   "created_at": "2024-01-15T10:00:00Z",
   "expires_at": "2024-04-15T10:00:00Z"
 }
@@ -214,11 +233,11 @@ Revocar una API key.
 | `204` | No Content | Petición exitosa, sin contenido |
 | `400` | Bad Request | Datos de entrada inválidos |
 | `401` | Unauthorized | API key inválida o faltante |
-| `403` | Forbidden | Sin permisos para la operación |
+| `403` | Forbidden | Sin permisos para la operación (incluye `API_KEY_READ_ONLY` y `API_KEY_WRITE_NOT_ALLOWED_HERE`) |
 | `404` | Not Found | Recurso no encontrado |
 | `409` | Conflict | Conflicto de estado (ej: factura ya firmada) |
 | `422` | Unprocessable | Validación de negocio fallida |
-| `429` | Too Many Requests | Límite de rate excedido |
+| `429` | Too Many Requests | Límite de rate excedido; la cabecera `Retry-After` indica cuándo reintentar |
 | `500` | Server Error | Error interno del servidor |
 
 ---
@@ -304,6 +323,8 @@ X-RateLimit-Remaining: 95
 X-RateLimit-Reset: 1642256400
 ```
 
+Cuando recibes un `429`, la respuesta incluye la cabecera `Retry-After`.
+
 ---
 
 ## Webhooks
@@ -313,13 +334,23 @@ X-RateLimit-Reset: 1642256400
 ```json
 {
   "url": "https://miempresa.com/webhooks/factuio",
-  "events": ["invoice.signed", "invoice.submitted"],
+  "events": ["invoice.finalized", "submission.completed"],
   "secret": "whsec_mi_secreto",
   "active": true
 }
 ```
 
+### Gestión por API
+
+Con una clave de integración con escritura puedes gestionar tus endpoints de webhook: `GET`, `POST` y `DELETE` sobre `/webhook-endpoints`. La URL debe ser pública: las URL de red privada se rechazan con `WEBHOOK_URL_NOT_ALLOWED`.
+
+### Eventos
+
+`invoice.finalized`, `submission.completed`, `invoice.paid` e `invoice.payment_reversed`.
+
 ### Verificación de Firma
+
+Cada entrega lleva la cabecera `X-Webhook-Signature`, un HMAC-SHA256 del cuerpo con tu secreto.
 
 ```python
 import hmac
@@ -343,7 +374,7 @@ def verify_webhook(payload, signature, secret):
 ```bash
 # Crear factura
 curl -X POST https://api.factuo.io/v1/invoices/submit \
-  -H "Authorization: Bearer factuio_sk_live_..." \
+  -H "Authorization: Bearer fio_..." \
   -H "Content-Type: application/json" \
   -d '{
     "invoice": {
@@ -402,7 +433,7 @@ console.log('Factura creada:', result.invoice.id);
 import requests
 
 headers = {
-    'Authorization': 'Bearer factuio_sk_live_...',
+    'Authorization': 'Bearer fio_...',
     'Content-Type': 'application/json'
 }
 
