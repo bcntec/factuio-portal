@@ -7,7 +7,7 @@ export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "
 export const site = {
   name: "FactuIO",
   company: "FactuIO",
-  supportEmail: "soporte@bcntec.es",
+  supportEmail: "soporte@factuio.app",
   nav: [
     { label: "Producto", href: "/#funciones" },
     { label: "Precios", href: "/precios/" },
