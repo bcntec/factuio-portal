@@ -10,7 +10,8 @@ import { Faq } from "@/components/faq";
 import { CtaBand } from "@/components/cta-band";
 import { SectionHeading } from "@/components/section-heading";
 import { home } from "@/content/home";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
+import { isSoon } from "@/lib/features";
 
 export default function HomePage() {
   return (
@@ -27,16 +28,18 @@ export default function HomePage() {
       </section>
       <ComplianceBand />
       <GestoriasTeaser />
-      <section className="mx-auto max-w-[1120px] px-6 py-16">
-        <SectionHeading eyebrow={home.sections.pricing.eyebrow} title={home.sections.pricing.title} />
-        <PricingCards compact />
-        <p className="mt-6 text-center"><Link href="/precios/" className="font-bold text-electric hover:underline">{home.sections.pricing.link}</Link></p>
-      </section>
+      {!isSoon("precios") && (
+        <section className="mx-auto max-w-[1120px] px-6 py-16">
+          <SectionHeading eyebrow={home.sections.pricing.eyebrow} title={home.sections.pricing.title} />
+          <PricingCards compact />
+          <p className="mt-6 text-center"><Link href="/precios/" className="font-bold text-electric hover:underline">{home.sections.pricing.link}</Link></p>
+        </section>
+      )}
       <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={home.sections.faq.eyebrow} title={home.sections.faq.title} />
         <Faq tag="home" />
       </section>
-      <CtaBand title={home.cta.title} text={home.cta.text} cta={{ label: home.cta.label, href: appUrl("/register") }} />
+      <CtaBand title={home.cta.title} text={home.cta.text} cta={{ label: home.cta.label, href: signupHref("/register") }} />
     </main>
   );
 }

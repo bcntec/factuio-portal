@@ -4,6 +4,7 @@ import { historias, type Story } from "@/content/historias";
 import { integrationStatusLabels } from "@/content/integraciones";
 
 vi.stubEnv("NEXT_PUBLIC_APP_URL", "https://app.test");
+vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app");
 
 import { StoryCard } from "./story-card";
 
@@ -35,9 +36,9 @@ describe("StoryCard", () => {
 
   it("shows the integration status pill only for stories that depend on a pending integration", () => {
     const { unmount } = render(<StoryCard story={shopify} />);
-    expect(screen.getByText(integrationStatusLabels.soon)).toBeInTheDocument();
+    expect(screen.getByText(integrationStatusLabels.beta)).toBeInTheDocument();
     unmount();
     render(<StoryCard story={marta as Story} />);
-    expect(screen.queryByText(integrationStatusLabels.soon)).not.toBeInTheDocument();
+    expect(screen.queryByText(integrationStatusLabels.beta)).not.toBeInTheDocument();
   });
 });

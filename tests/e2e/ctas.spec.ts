@@ -1,16 +1,21 @@
 import { expect, test } from "@playwright/test";
 
-const APP = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.test";
-
-test("nav CTAs point to the app", async ({ page }) => {
+// Con NEXT_PUBLIC_FEATURES_LIVE vacío (por defecto) la app y los precios están en «Próximamente».
+test("nav CTAs point to the waitlist while the app is soon", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Empieza gratis" }).first()).toHaveAttribute("href", `${APP}/register`);
-  await expect(page.getByRole("link", { name: "Entrar" }).first()).toHaveAttribute("href", `${APP}/login`);
+  await expect(page.getByRole("link", { name: "Empieza gratis" }).first()).toHaveAttribute("href", "/lista-espera/");
+  await expect(page.getByRole("link", { name: "Entrar" }).first()).toHaveAttribute("href", "/lista-espera/");
 });
 
-test("pricing toggle switches to annual prices", async ({ page }) => {
+test("pricing shows the coming-soon page", async ({ page }) => {
   await page.goto("/precios/");
-  await expect(page.getByTestId("price-pro")).toHaveText("19");
-  await page.getByRole("button", { name: "Anual" }).click();
-  await expect(page.getByTestId("price-pro")).toHaveText("15,80");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Precios, muy pronto");
+});
+
+test("waitlist form validates on the server", async ({ page }) => {
+  await page.goto("/lista-espera/");
+  await page.getByLabel("Correo electrónico").fill("ana@empresa.es");
+  await page.getByLabel("¿Cómo vas a usar FactuIO?").selectOption("pyme");
+  await page.getByRole("button", { name: "Apuntarme" }).click();
+  await expect(page.getByText("Necesitamos que aceptes la política de privacidad.")).toBeVisible();
 });

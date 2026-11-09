@@ -1,9 +1,8 @@
-# CI del portal. El despliegue lo hace VERCEL (proyecto factuio-portal), no este workflow:
-# hasta el 2026-09-19 convivian los dos destinos para el mismo sitio y no habia forma de saber
-# cual era el bueno. Aqui solo se verifica; publicar es cosa de Vercel.
+# CI del portal. Solo verifica; el portal se sirve en factuio.app desde el Dockerfile
+# (servidor Node standalone, que atiende la ruta /api/waitlist). Vercel ya no se usa.
 #
-# Se conserva la doble comprobacion de build con y sin BASE_PATH: el portal es estatico
-# (output: "export") y servirlo bajo un subdirectorio rompe rutas si no se prueba.
+# Se conserva la doble comprobacion de build con y sin BASE_PATH: servir el portal bajo
+# un subdirectorio rompe rutas si no se prueba.
 name: CI
 on:
   push: { branches: [main] }

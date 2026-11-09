@@ -4,7 +4,8 @@ import createMDX from "@next/mdx";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Servidor Node propio (no export estático): la ruta /api/waitlist llama a Brevo con una clave secreta.
+  output: "standalone",
   trailingSlash: true,
   basePath,
   images: { unoptimized: true },

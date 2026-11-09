@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { ComingSoon } from "@/components/coming-soon";
+import { site } from "@/content/site";
+import { isSoon } from "@/lib/features";
 import { Chip } from "@/components/chip";
 import { SectionHeading } from "@/components/section-heading";
 import { StoryCard } from "@/components/story-card";
 import { Faq } from "@/components/faq";
 import { CtaBand } from "@/components/cta-band";
 import { historias } from "@/content/historias";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: historias.meta.title,
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function StoriesPage() {
+  if (isSoon("historias")) return <ComingSoon title={site.soon.pages.historias.title} text={site.soon.pages.historias.text} />;
   const h = historias;
   return (
     <main>
@@ -34,7 +38,7 @@ export default function StoriesPage() {
         <Faq tag="historias" />
       </section>
 
-      <CtaBand title={h.cta.title} text={h.cta.text} cta={{ label: h.cta.label, href: appUrl("/register") }} />
+      <CtaBand title={h.cta.title} text={h.cta.text} cta={{ label: h.cta.label, href: signupHref("/register") }} />
     </main>
   );
 }

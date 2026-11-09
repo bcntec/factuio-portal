@@ -4,7 +4,7 @@
 > en España. Factura, cobra y presenta impuestos cumpliendo con la Agencia Tributaria (AEAT),
 > sin certificado digital propio si se delega la firma en FactuIO.
 
-FactuIO es un producto de BCN-TEC. Esta página resume el sitio público para agentes de IA y
+Esta página resume el sitio público para agentes de IA y
 motores de respuesta: qué hace el producto, a quién se dirige y dónde encontrar cada cosa.
 El origen de verdad es el contenido en vivo de cada URL; si algo aquí y la página difieren,
 prevalece la página.

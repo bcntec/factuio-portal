@@ -9,7 +9,7 @@ import { Callout } from "@/components/callout";
 import { Faq } from "@/components/faq";
 import { CtaBand } from "@/components/cta-band";
 import { verifactu } from "@/content/verifactu";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: verifactu.meta.title,
@@ -113,7 +113,7 @@ export default function VerifactuPage() {
         <Faq tag="verifactu" />
       </section>
 
-      <CtaBand title={v.cta.title} text={v.cta.text} cta={{ label: v.cta.label, href: appUrl("/register") }} />
+      <CtaBand title={v.cta.title} text={v.cta.text} cta={{ label: v.cta.label, href: signupHref("/register") }} />
     </main>
   );
 }

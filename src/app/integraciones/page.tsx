@@ -6,14 +6,15 @@ import { CtaBand } from "@/components/cta-band";
 import { IntegrationCard, IntegrationStatusPill } from "@/components/integration-card";
 import { integraciones, type IntegrationStatus } from "@/content/integraciones";
 import { site } from "@/content/site";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
+import { isSoonHref } from "@/lib/features";
 
 export const metadata: Metadata = {
   title: integraciones.meta.title,
   description: integraciones.meta.description,
 };
 
-const legendStatuses: IntegrationStatus[] = ["available", "beta", "soon", "roadmap"];
+const legendStatuses: IntegrationStatus[] = ["available", "beta", "soon", "roadmap", "evaluating"];
 
 export default function IntegrationsPage() {
   const i = integraciones;
@@ -52,7 +53,7 @@ export default function IntegrationsPage() {
           <div>
             <p className="bcn-eyebrow mb-3 !text-mint">{i.developers.eyebrow}</p>
             <h2 className="text-3xl text-white">{i.developers.title}</h2>
-            <Link href={i.developers.cta.href} className="mt-6 inline-block rounded-lg bg-mint px-6 py-3 font-bold text-white hover:bg-mint-600">{i.developers.cta.label}</Link>
+            {!isSoonHref(i.developers.cta.href) && <Link href={i.developers.cta.href} className="mt-6 inline-block rounded-lg bg-mint px-6 py-3 font-bold text-white hover:bg-mint-600">{i.developers.cta.label}</Link>}
           </div>
           <ul className="flex flex-col gap-3">
             {i.developers.bullets.map((b) => <li key={b} className="flex items-center gap-3 text-[15px]"><span className="grid size-6 place-items-center rounded-md bg-mint"><Check size={14} strokeWidth={3} aria-hidden="true" /></span>{b}</li>)}
@@ -68,7 +69,7 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
-      <CtaBand title={i.cta.title} text={i.cta.text} cta={{ label: i.cta.label, href: appUrl("/register") }} />
+      <CtaBand title={i.cta.title} text={i.cta.text} cta={{ label: i.cta.label, href: signupHref("/register") }} />
     </main>
   );
 }

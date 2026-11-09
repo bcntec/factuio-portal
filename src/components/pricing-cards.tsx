@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import clsx from "clsx";
 import { annualBadge, billingNote, formatEur, plans, pricingLabels } from "@/content/pricing";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 type Billing = "monthly" | "annual";
 
@@ -40,7 +40,7 @@ export function PricingCards({ compact = false }: { compact?: boolean }) {
                 <span className="text-sm opacity-70">{pricingLabels.perMonth}</span>
               </p>
               {!compact && <p className="mt-0.5 min-h-5 text-[13px] opacity-70">{billingNote[billing]}</p>}
-              <a href={appUrl(`/register?plan=${p.id}`)}
+              <a href={signupHref(`/register?plan=${p.id}`)}
                 className={clsx("my-5 rounded-lg px-6 py-3 text-center font-bold",
                   p.featured ? "bg-mint text-white hover:bg-mint-600" : "border-2 border-ink text-ink hover:bg-ink hover:text-white")}>
                 {p.cta}

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import clsx from "clsx";
 import { site } from "@/content/site";
-import { appUrl } from "@/lib/links";
+import { loginHref, signupHref } from "@/lib/links";
 
 function isActive(pathname: string, href: string): boolean {
   const clean = href.split("#")[0];
@@ -27,8 +27,8 @@ export function SiteNav() {
   });
   const ctas = (
     <>
-      <a href={appUrl("/login")} className="rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-ink hover:text-white">{site.cta.login}</a>
-      <a href={appUrl("/register")} className="rounded-lg bg-mint px-4 py-2 text-sm font-bold text-white hover:bg-mint-600">{site.cta.register}</a>
+      <a href={loginHref()} className="rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-ink hover:text-white">{site.cta.login}</a>
+      <a href={signupHref()} className="rounded-lg bg-mint px-4 py-2 text-sm font-bold text-white hover:bg-mint-600">{site.cta.register}</a>
     </>
   );
   return (

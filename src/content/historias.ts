@@ -132,7 +132,7 @@ export const historias = {
       ],
       modules: ["Conexión Shopify", "Facturas VERI*FACTU", "Bandeja de entrada", "API"],
       plan: "pro",
-      status: "soon",
+      status: "beta",
       cta: { label: "Ver el estado de la integración", href: "/integraciones/#commerce" },
     },
   ] as Story[],

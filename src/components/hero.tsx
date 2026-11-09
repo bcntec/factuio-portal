@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Chip } from "@/components/chip";
 import { DashboardMock } from "@/components/dashboard-mock";
 import { home } from "@/content/home";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
+import { isSoon } from "@/lib/features";
 
 export function Hero() {
   const h = home.hero;
@@ -14,8 +15,8 @@ export function Hero() {
           <h1 className="text-4xl text-navy md:text-5xl">{h.title}</h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">{h.sub}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href={appUrl("/register")} className="rounded-lg bg-mint px-7 py-3 font-bold text-white hover:bg-mint-600">{h.primary}</a>
-            <Link href="/precios/" className="rounded-lg border-2 border-ink px-7 py-3 font-bold text-ink hover:bg-ink hover:text-white">{h.secondary}</Link>
+            <a href={signupHref("/register")} className="rounded-lg bg-mint px-7 py-3 font-bold text-white hover:bg-mint-600">{h.primary}</a>
+            {!isSoon("precios") && <Link href="/precios/" className="rounded-lg border-2 border-ink px-7 py-3 font-bold text-ink hover:bg-ink hover:text-white">{h.secondary}</Link>}
           </div>
           <div className="mt-6 flex flex-wrap gap-2.5">{h.chips.map((c) => <Chip key={c.text} tone={c.tone}>{c.text}</Chip>)}</div>
         </div>
