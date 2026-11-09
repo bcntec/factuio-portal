@@ -15,7 +15,8 @@ test("pricing shows the coming-soon page", async ({ page }) => {
 test("waitlist form validates on the server", async ({ page }) => {
   await page.goto("/lista-espera/");
   await page.getByLabel("Correo electrónico").fill("ana@empresa.es");
-  await page.getByLabel("¿Cómo vas a usar FactuIO?").selectOption("pyme");
+  await page.getByRole("combobox", { name: "¿Cómo vas a usar FactuIO?" }).click();
+  await page.getByRole("option", { name: "Tengo una pyme" }).click();
   await page.getByRole("button", { name: "Apuntarme" }).click();
   await expect(page.getByText("Necesitamos que aceptes la política de privacidad.")).toBeVisible();
 });
