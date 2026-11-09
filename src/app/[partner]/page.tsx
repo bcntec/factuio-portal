@@ -28,7 +28,7 @@ export default async function PartnerPage({ params }: Props) {
         <Image src={`${base}/brand/factuio-logo.png`} alt="FactuIO" width={118} height={44} priority />
         <span aria-hidden className="text-2xl font-light text-ink-3">×</span>
         {p.logo
-          ? <Image src={`${base}${p.logo.src}`} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-11 w-auto" priority />
+          ? <Image src={`${base}${p.logo.src}`} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-16 w-auto" priority />
           : <span className="text-2xl font-bold text-navy">{p.name}</span>}
       </div>
       <h1 className="mt-10 text-4xl text-navy md:text-5xl">{p.title}</h1>

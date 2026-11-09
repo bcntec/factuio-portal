@@ -20,11 +20,18 @@ describe("SiteNav", () => {
     vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
     render(<SiteNav />);
     expect(screen.getByRole("link", { name: "Empieza gratis" })).toHaveAttribute("href", "/lista-espera/");
+    expect(screen.queryByRole("link", { name: "Entrar" })).toBeNull();
+  });
+
+  it("shows Entrar only when the login feature is live", () => {
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "login");
+    render(<SiteNav />);
     expect(screen.getByRole("link", { name: "Entrar" })).toHaveAttribute("href", "/lista-espera/");
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
   });
 
   it("links CTAs to the app when the app is live", () => {
-    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app");
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app,login");
     render(<SiteNav />);
     expect(screen.getByRole("link", { name: "Empieza gratis" })).toHaveAttribute("href", "https://app.test/register");
     expect(screen.getByRole("link", { name: "Entrar" })).toHaveAttribute("href", "https://app.test/login");

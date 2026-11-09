@@ -14,10 +14,11 @@ export interface Partner {
 
 export const partners: readonly Partner[] = [
   {
-    slug: "loft15",
-    name: "Loft15",
-    title: "FactuIO para la comunidad de Loft15",
-    text: "Si eres de Loft15, apúntate a la lista de espera y te daremos acceso entre los primeros.",
+    slug: "loft153",
+    name: "Loft 153",
+    logo: { src: "/partners/loft153-logo.png", width: 400, height: 289 },
+    title: "FactuIO para la comunidad de Loft 153",
+    text: "Si eres de Loft 153, apúntate a la lista de espera y te daremos acceso entre los primeros.",
   },
 ];
 
