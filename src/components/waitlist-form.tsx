@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Select } from "@/components/ui/select";
+import { currentSource } from "@/lib/signup-source";
 
 type Status = "idle" | "sending" | "done";
 type ErrorKey = keyof typeof site.waitlist.errors;
@@ -30,6 +31,7 @@ export function WaitlistForm() {
           profile: data.get("profile"),
           consent: data.get("consent") === "on",
           website: data.get("website"),
+          source: currentSource(window.location.search),
         }),
       });
       if (res.ok) { setStatus("done"); return; }

@@ -26,7 +26,16 @@ describe("WaitlistForm", () => {
     expect(await screen.findByText(w.success.title)).toBeInTheDocument();
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe("/api/waitlist/");
-    expect(JSON.parse(init.body)).toMatchObject({ email: "ana@empresa.es", profile: "gestoria", consent: true });
+    expect(JSON.parse(init.body)).toMatchObject({ email: "ana@empresa.es", profile: "gestoria", consent: true, source: null });
+  });
+
+  it("sends the remembered signup source", async () => {
+    sessionStorage.setItem("factuio.signup-source", "loft15");
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    await fill();
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ source: "loft15" });
+    sessionStorage.clear();
   });
 
   it("shows the server's validation message", async () => {

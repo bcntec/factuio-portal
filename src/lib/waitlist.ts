@@ -15,7 +15,22 @@ export const PROFILE_LABELS: Record<WaitlistProfile, string> = {
 /** Atributo de contacto en Brevo (tipo texto) donde se guarda el perfil. */
 export const BREVO_PROFILE_ATTRIBUTE = "PERFIL";
 
-export interface WaitlistInput { email: string; profile: WaitlistProfile }
+/** Atributo de contacto en Brevo (tipo texto) con el origen del alta: loft15, linkedin, web… */
+export const BREVO_SOURCE_ATTRIBUTE = "ORIGEN";
+/** Origen cuando el enlace no trae ninguno (o trae uno no válido). */
+export const DEFAULT_SOURCE = "web";
+
+/**
+ * Normaliza el origen de un enlace (?origen=Loft15 → "loft15"). Solo letras, números, - y _,
+ * hasta 40 caracteres; cualquier otra cosa se descarta en vez de dar error al usuario.
+ */
+export function normalizeSource(raw: unknown): string {
+  if (typeof raw !== "string") return DEFAULT_SOURCE;
+  const s = raw.trim().toLowerCase();
+  return /^[a-z0-9_-]{1,40}$/.test(s) ? s : DEFAULT_SOURCE;
+}
+
+export interface WaitlistInput { email: string; profile: WaitlistProfile; source: string }
 export type WaitlistParseError = "bad_request" | "invalid_email" | "invalid_profile" | "consent_required";
 export type WaitlistParseResult =
   | { ok: true; value: WaitlistInput }
@@ -36,7 +51,7 @@ export function parseWaitlist(body: unknown): WaitlistParseResult {
     return { ok: false, error: "invalid_profile" };
   }
   if (b.consent !== true) return { ok: false, error: "consent_required" };
-  return { ok: true, value: { email, profile: profile as WaitlistProfile } };
+  return { ok: true, value: { email, profile: profile as WaitlistProfile, source: normalizeSource(b.source) } };
 }
 
 export interface BrevoConfig { apiKey: string; listId: number; templateId: number; redirectionUrl: string }
@@ -59,7 +74,7 @@ export async function requestDoubleOptIn(input: WaitlistInput, cfg: BrevoConfig,
     headers: { "api-key": cfg.apiKey, "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify({
       email: input.email,
-      attributes: { [BREVO_PROFILE_ATTRIBUTE]: PROFILE_LABELS[input.profile] },
+      attributes: { [BREVO_PROFILE_ATTRIBUTE]: PROFILE_LABELS[input.profile], [BREVO_SOURCE_ATTRIBUTE]: input.source },
       includeListIds: [cfg.listId],
       templateId: cfg.templateId,
       redirectionUrl: cfg.redirectionUrl,
