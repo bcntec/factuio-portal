@@ -23,7 +23,7 @@ Variables de entorno (ver `.env.example`):
 
 - `NEXT_PUBLIC_APP_URL` — URL pública de la app FactuIO (destino de los CTA "Empieza gratis" / "Entrar"). Obligatoria.
 - `NEXT_PUBLIC_BASE_PATH` — prefijo de rutas. `/factuio-portal` en GitHub Pages (proyecto sin dominio propio), vacío (`""`) con dominio propio.
-- `NEXT_PUBLIC_SITE_URL` — URL canónica del sitio (sitemap, Open Graph). Opcional: si no se fija, se deriva como `https://bcntec.github.io${NEXT_PUBLIC_BASE_PATH}`. Fijarla cuando el sitio tenga dominio propio.
+- `NEXT_PUBLIC_SITE_URL` — URL canónica del sitio (sitemap, Open Graph). Opcional: por defecto `https://factuio.app`.
 
 ## Comandos
 
@@ -75,9 +75,9 @@ Configuración manual (una sola vez, en el repo de GitHub):
 - **Settings → Variables → Actions:**
   - `APP_URL` — URL pública de la web app FactuIO (p. ej. `https://app.factuio.io`).
   - `BASE_PATH` — `/factuio-portal` si se sirve en `https://bcntec.github.io/factuio-portal/`, vacío si el sitio tiene dominio propio.
-  - `SITE_URL` — opcional. URL canónica del sitio (sitemap, Open Graph); si no se define, se deriva de `https://bcntec.github.io` + `BASE_PATH`.
+  - `SITE_URL` — opcional. URL canónica del sitio (sitemap, Open Graph); por defecto `https://factuio.app`.
 
-URL del sitio: `https://bcntec.github.io/factuio-portal/` (o el dominio propio configurado).
+URL del sitio: `https://factuio.app/`.
 
 ## Estructura
 
