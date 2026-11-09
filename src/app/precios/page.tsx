@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { ComingSoon } from "@/components/coming-soon";
+import { site } from "@/content/site";
+import { isSoon } from "@/lib/features";
 import { Chip } from "@/components/chip";
 import { PricingCards } from "@/components/pricing-cards";
 import { CompareTable } from "@/components/compare-table";
@@ -6,7 +9,7 @@ import { Faq } from "@/components/faq";
 import { CtaBand } from "@/components/cta-band";
 import { SectionHeading } from "@/components/section-heading";
 import { pricingPage } from "@/content/pricing";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: pricingPage.meta.title,
@@ -14,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function PricingPage() {
+  if (isSoon("precios")) return <ComingSoon title={site.soon.pages.precios.title} text={site.soon.pages.precios.text} />;
   return (
     <main>
       <header className="bg-card px-6 pb-14 pt-18 text-center">
@@ -40,7 +44,7 @@ export default function PricingPage() {
         <SectionHeading eyebrow={pricingPage.faq.eyebrow} title={pricingPage.faq.title} />
         <Faq tag="pricing" />
       </section>
-      <CtaBand title={pricingPage.cta.title} text={pricingPage.cta.text} cta={{ label: pricingPage.cta.label, href: appUrl("/register") }} />
+      <CtaBand title={pricingPage.cta.title} text={pricingPage.cta.text} cta={{ label: pricingPage.cta.label, href: signupHref("/register") }} />
     </main>
   );
 }

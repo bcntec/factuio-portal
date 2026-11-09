@@ -4,6 +4,7 @@ import { historias, type Story } from "@/content/historias";
 import { integrationStatusLabels } from "@/content/integraciones";
 
 vi.stubEnv("NEXT_PUBLIC_APP_URL", "https://app.test");
+vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app");
 
 import { StoryCard } from "./story-card";
 

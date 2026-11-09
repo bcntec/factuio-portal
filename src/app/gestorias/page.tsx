@@ -8,7 +8,7 @@ import { CtaBand } from "@/components/cta-band";
 import { SectionHeading } from "@/components/section-heading";
 import { gestorias } from "@/content/gestorias";
 import { formatEur, plans, pricingLabels } from "@/content/pricing";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: gestorias.meta.title,
@@ -41,7 +41,7 @@ export default function AdvisorsPage() {
           <h2 className="bcn-label !text-white">{plan.name}</h2>
           <p className="mt-1 text-sm text-navy-muted">{plan.tagline}</p>
           <p className="mt-5 flex items-baseline gap-1.5"><span className="text-sm opacity-70">{pricingLabels.from}</span><span className="bcn-num text-4xl font-bold">{formatEur(plan.monthly)}</span><span className="text-sm opacity-70">{pricingLabels.perMonth}</span></p>
-          <a href={appUrl(`/register?plan=${plan.id}`)} className="my-5 block rounded-lg bg-mint px-6 py-3 text-center font-bold text-white hover:bg-mint-600">{plan.cta}</a>
+          <a href={signupHref(`/register?plan=${plan.id}`)} className="my-5 block rounded-lg bg-mint px-6 py-3 text-center font-bold text-white hover:bg-mint-600">{plan.cta}</a>
           <ul className="flex flex-col gap-2 text-[14.5px]">
             {plan.features.map((f) => <li key={f} className="flex items-start gap-2.5"><span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md bg-mint"><Check size={12} strokeWidth={3} aria-hidden="true" /></span>{f}</li>)}
           </ul>
@@ -51,7 +51,7 @@ export default function AdvisorsPage() {
         <SectionHeading eyebrow={g.sections.faq.eyebrow} title={g.sections.faq.title} />
         <Faq tag="gestoria" />
       </section>
-      <CtaBand title={g.cta.title} text={g.cta.text} cta={{ label: g.cta.label, href: appUrl("/register?plan=gestoria") }} />
+      <CtaBand title={g.cta.title} text={g.cta.text} cta={{ label: g.cta.label, href: signupHref("/register?plan=gestoria") }} />
     </main>
   );
 }

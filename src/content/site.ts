@@ -2,7 +2,7 @@ export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://bcntec.github.io${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
-export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/docs/modelo-390-con-ia/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/"];
+export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/docs/modelo-390-con-ia/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/", "/lista-espera/"];
 
 export const site = {
   name: "FactuIO",
@@ -18,6 +18,23 @@ export const site = {
     { label: "Docs", href: "/docs/" },
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
+  soon: {
+    chip: "Próximamente",
+    badge: "Pronto",
+    cta: "Apúntate a la lista de espera",
+    pages: {
+      precios: { title: "Precios, muy pronto", text: "Estamos cerrando los planes. Apúntate a la lista de espera y te avisamos en cuanto estén publicados." },
+      historias: { title: "Historias de uso, muy pronto", text: "Estamos preparando casos reales de autónomos, pymes y gestorías que facturan con FactuIO." },
+      docs: { title: "Documentación, muy pronto", text: "Estamos terminando las guías de uso y la referencia de la API." },
+    },
+  },
+  waitlist: {
+    meta: { title: "Lista de espera — FactuIO", description: "Apúntate a la lista de espera de FactuIO." },
+    eyebrow: "Lista de espera",
+    title: "Apúntate a la lista de espera",
+    text: "FactuIO abre por tandas. Déjanos tus datos y te avisamos cuando tengas acceso.",
+    pending: "El formulario de registro estará disponible muy pronto.",
+  },
   mobileMenuLabel: "Abrir menú",
   mobileMenuCloseLabel: "Cerrar menú",
   meta: {

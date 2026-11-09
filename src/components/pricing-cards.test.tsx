@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
 vi.stubEnv("NEXT_PUBLIC_APP_URL", "https://app.test");
+vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app");
 import { PricingCards } from "./pricing-cards";
 
 describe("PricingCards", () => {

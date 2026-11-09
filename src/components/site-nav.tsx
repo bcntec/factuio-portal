@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import clsx from "clsx";
 import { site } from "@/content/site";
-import { appUrl } from "@/lib/links";
+import { loginHref, signupHref } from "@/lib/links";
+import { isSoonHref } from "@/lib/features";
+import { SoonBadge } from "@/components/soon-badge";
 
 function isActive(pathname: string, href: string): boolean {
   const clean = href.split("#")[0];
@@ -17,6 +19,13 @@ export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const links = site.nav.map((item) => {
+    if (isSoonHref(item.href)) {
+      return (
+        <span key={item.href} aria-disabled="true" className="cursor-default text-[15px] font-semibold text-muted-foreground">
+          {item.label}<SoonBadge label={site.soon.badge} />
+        </span>
+      );
+    }
     const active = isActive(pathname, item.href);
     return (
       <Link key={item.href} href={item.href} aria-current={active ? "page" : undefined}
@@ -27,8 +36,8 @@ export function SiteNav() {
   });
   const ctas = (
     <>
-      <a href={appUrl("/login")} className="rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-ink hover:text-white">{site.cta.login}</a>
-      <a href={appUrl("/register")} className="rounded-lg bg-mint px-4 py-2 text-sm font-bold text-white hover:bg-mint-600">{site.cta.register}</a>
+      <a href={loginHref()} className="rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold text-ink hover:bg-ink hover:text-white">{site.cta.login}</a>
+      <a href={signupHref()} className="rounded-lg bg-mint px-4 py-2 text-sm font-bold text-white hover:bg-mint-600">{site.cta.register}</a>
     </>
   );
   return (

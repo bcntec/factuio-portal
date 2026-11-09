@@ -3,22 +3,41 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { site } from "@/content/site";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/precios/" }));
+vi.mock("next/navigation", () => ({ usePathname: () => "/integraciones/" }));
 vi.stubEnv("NEXT_PUBLIC_APP_URL", "https://app.test");
+vi.stubEnv("NEXT_PUBLIC_BASE_PATH", "");
 
 import { SiteNav } from "./site-nav";
 
 describe("SiteNav", () => {
   it("marks the current route as active", () => {
     render(<SiteNav />);
-    expect(screen.getByRole("link", { name: "Precios" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Integraciones" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByRole("link", { name: "Gestorías" })).not.toHaveAttribute("aria-current");
   });
 
-  it("links CTAs to the app", () => {
+  it("sends CTAs to the waitlist while the app is soon", () => {
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
+    render(<SiteNav />);
+    expect(screen.getByRole("link", { name: "Empieza gratis" })).toHaveAttribute("href", "/lista-espera/");
+    expect(screen.getByRole("link", { name: "Entrar" })).toHaveAttribute("href", "/lista-espera/");
+  });
+
+  it("links CTAs to the app when the app is live", () => {
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "app");
     render(<SiteNav />);
     expect(screen.getByRole("link", { name: "Empieza gratis" })).toHaveAttribute("href", "https://app.test/register");
     expect(screen.getByRole("link", { name: "Entrar" })).toHaveAttribute("href", "https://app.test/login");
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
+  });
+
+  it("shows soon sections as non-links with a badge", () => {
+    vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
+    render(<SiteNav />);
+    for (const name of ["Precios", "Historias", "Docs"]) {
+      expect(screen.queryByRole("link", { name })).toBeNull();
+      expect(screen.getAllByText(name)[0].closest("[aria-disabled]")).not.toBeNull();
+    }
   });
 
   it("opens the mobile panel on click and closes it when a link inside is clicked", async () => {

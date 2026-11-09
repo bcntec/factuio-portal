@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { Chip } from "@/components/chip";
 import { IntegrationStatusPill } from "@/components/integration-card";
 import { historias, type Story } from "@/content/historias";
-import { appUrl } from "@/lib/links";
+import { signupHref } from "@/lib/links";
 
 const ctaClass = "inline-block rounded-lg bg-mint px-6 py-3 text-center font-bold text-white hover:bg-mint-600";
 
@@ -40,7 +40,7 @@ export function StoryCard({ story, flip = false }: { story: Story; flip?: boolea
           </ul>
         </div>
         {story.cta.app
-          ? <a href={appUrl(story.cta.href)} className={ctaClass}>{story.cta.label}</a>
+          ? <a href={signupHref(story.cta.href)} className={ctaClass}>{story.cta.label}</a>
           : <Link href={story.cta.href} className={ctaClass}>{story.cta.label}</Link>}
       </div>
     </article>

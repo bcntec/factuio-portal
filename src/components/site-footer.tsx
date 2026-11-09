@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { isSoonHref } from "@/lib/features";
+import { SoonBadge } from "@/components/soon-badge";
 
 export function SiteFooter() {
   return (
@@ -13,7 +15,13 @@ export function SiteFooter() {
           <div key={col.title}>
             <p className="bcn-label mb-3">{col.title}</p>
             <ul className="flex flex-col gap-2 text-sm">
-              {col.links.map((l) => <li key={l.href}><Link href={l.href} className="hover:text-electric">{l.label}</Link></li>)}
+              {col.links.map((l) => (
+                <li key={l.href}>
+                  {isSoonHref(l.href)
+                    ? <span aria-disabled="true" className="cursor-default text-muted-foreground">{l.label}<SoonBadge label={site.soon.badge} /></span>
+                    : <Link href={l.href} className="hover:text-electric">{l.label}</Link>}
+                </li>
+              ))}
             </ul>
           </div>
         ))}
