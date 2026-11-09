@@ -7,8 +7,6 @@ import { Menu } from "lucide-react";
 import clsx from "clsx";
 import { site } from "@/content/site";
 import { loginHref, signupHref } from "@/lib/links";
-import { isSoonHref } from "@/lib/features";
-import { SoonBadge } from "@/components/soon-badge";
 
 function isActive(pathname: string, href: string): boolean {
   const clean = href.split("#")[0];
@@ -19,13 +17,6 @@ export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const links = site.nav.map((item) => {
-    if (isSoonHref(item.href)) {
-      return (
-        <span key={item.href} aria-disabled="true" className="cursor-default text-[15px] font-semibold text-muted-foreground">
-          {item.label}<SoonBadge label={site.soon.badge} />
-        </span>
-      );
-    }
     const active = isActive(pathname, item.href);
     return (
       <Link key={item.href} href={item.href} aria-current={active ? "page" : undefined}

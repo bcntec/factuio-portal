@@ -31,13 +31,13 @@ describe("SiteNav", () => {
     vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
   });
 
-  it("shows soon sections as non-links with a badge", () => {
+  it("keeps soon sections as plain links and has no Docs entry", () => {
     vi.stubEnv("NEXT_PUBLIC_FEATURES_LIVE", "");
     render(<SiteNav />);
-    for (const name of ["Precios", "Historias", "Docs"]) {
-      expect(screen.queryByRole("link", { name })).toBeNull();
-      expect(screen.getAllByText(name)[0].closest("[aria-disabled]")).not.toBeNull();
-    }
+    expect(screen.getByRole("link", { name: "Precios" })).toHaveAttribute("href", expect.stringMatching(/^\/precios\/?$/));
+    expect(screen.getByRole("link", { name: "Historias" })).toHaveAttribute("href", expect.stringMatching(/^\/historias\/?$/));
+    expect(screen.queryByText("Docs")).toBeNull();
+    expect(screen.queryByText("Pronto")).toBeNull();
   });
 
   it("opens the mobile panel on click and closes it when a link inside is clicked", async () => {

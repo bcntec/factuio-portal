@@ -15,12 +15,10 @@ export const site = {
     { label: "Integraciones", href: "/integraciones/" },
     { label: "VeriFactu", href: "/verifactu/" },
     { label: "Historias", href: "/historias/" },
-    { label: "Docs", href: "/docs/" },
   ] as NavItem[],
   cta: { login: "Entrar", register: "Empieza gratis" },
   soon: {
     chip: "Próximamente",
-    badge: "Pronto",
     cta: "Apúntate a la lista de espera",
     pages: {
       precios: { title: "Precios, muy pronto", text: "Estamos cerrando los planes. Apúntate a la lista de espera y te avisamos en cuanto estén publicados." },
@@ -58,8 +56,6 @@ export const site = {
       { title: "Recursos", links: [
         { label: "VeriFactu", href: "/verifactu/" },
         { label: "Historias de uso", href: "/historias/" },
-        { label: "Documentación", href: "/docs/" },
-        { label: "API", href: "/docs/api/" },
       ] },
       { title: "Legal", links: [
         { label: "Privacidad", href: "/legal/privacidad/" },
