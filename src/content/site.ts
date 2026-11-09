@@ -6,7 +6,7 @@ export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "
 
 export const site = {
   name: "FactuIO",
-  company: "BCN-TEC",
+  company: "FactuIO",
   supportEmail: "soporte@bcntec.es",
   nav: [
     { label: "Producto", href: "/#funciones" },
