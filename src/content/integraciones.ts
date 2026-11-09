@@ -31,6 +31,7 @@ export const integraciones = {
       { id: "sii", name: "SII", vendor: "Agencia Tributaria", mark: "SII", status: "roadmap", text: "Libros de IVA en tiempo real para grandes empresas y REDEME." },
       { id: "facturae", name: "Facturae", vendor: "Administración pública", mark: "Fe", status: "available", text: "Genera tus facturas en Facturae 3.2.2 con firma XAdES-EPES." },
       { id: "face", name: "FACe y FACeB2B", vendor: "Administración pública", mark: "FACe", status: "available", text: "Envía facturas a las administraciones públicas (FACe) y sigue su estado; recibe facturas por FACeB2B como propuestas de gasto. Operativo frente al entorno de pruebas de FACe; alta en producción en trámite." },
+      { id: "einvoice-in", name: "Factura electrónica recibida", vendor: "Facturae, UBL y CII", mark: "XML", status: "available", text: "Convierte la factura electrónica de un proveedor en un gasto listo para revisar." },
       { id: "einvoice-b2b", name: "Factura electrónica B2B", vendor: "Ley Crea y Crece", mark: "B2B", status: "roadmap", text: "Envío electrónico entre empresas cuando se publique el reglamento de la Ley Crea y Crece. Tus facturas ya salen en Facturae." },
       { id: "clave", name: "Cl@ve", vendor: "Administración General del Estado", mark: "C@", status: "roadmap", text: "Presenta sin certificado, con Cl@ve PIN o permanente." },
     ] },
@@ -43,7 +44,7 @@ export const integraciones = {
       { id: "holded-quipu-anfix", name: "Holded, Quipu y Anfix", vendor: "Asesoría en la nube", mark: "HQ", status: "roadmap", text: "Traspaso directo a plataformas cloud de asesoría." },
     ] },
     { id: "payments", title: "Cobros", text: "Que te paguen desde el enlace de la factura.", items: [
-      { id: "stripe", name: "Stripe", vendor: "Tarjeta y wallet", mark: "St", status: "available", text: "Cobro con tarjeta desde la factura o con un enlace de pago, recibo automático al cliente y devoluciones." },
+      { id: "stripe", name: "Stripe", vendor: "Tarjeta y wallet", mark: "St", status: "beta", text: "Cobro con tarjeta desde la factura o con un enlace de pago, recibo automático al cliente y devoluciones." },
       { id: "redsys", name: "Redsys", vendor: "TPV virtual bancario", mark: "Rd", status: "beta", text: "Cobro con tarjeta a través de tu banco, con devoluciones y consulta del estado del pago." },
       { id: "bizum", name: "Bizum", vendor: "Vía Redsys", mark: "Bz", status: "beta", text: "Cobro por Bizum desde la factura o la app." },
       { id: "monei", name: "MONEI", vendor: "Tarjeta y Bizum", mark: "Mo", status: "beta", text: "Cobro con tarjeta y Bizum a través de MONEI." },
@@ -71,6 +72,7 @@ export const integraciones = {
     ] },
     { id: "documents", title: "Documentos", text: "Tus PDFs donde tú quieras.", items: [
       { id: "file-sharing", name: "Enlaces para compartir", vendor: "Descarga para terceros", mark: "URL", status: "available", text: "Comparte facturas y documentos con un enlace." },
+      { id: "mail-expenses", name: "Gastos desde el correo", vendor: "Gmail y Outlook", mark: "Mail", status: "beta", text: "Lee tu buzón y propone gastos a partir de las facturas adjuntas (PDF, imagen o Facturae)." },
       { id: "cloud-drive", name: "Google Drive, Dropbox y OneDrive", vendor: "Tu nube", mark: "GD", status: "roadmap", text: "Copia automática de facturas y gastos en tu nube." },
     ] },
     { id: "ai", title: "IA y automatización", text: "Para conectar FactuIO con tus sistemas o con tus agentes.", items: [
@@ -86,11 +88,10 @@ export const integraciones = {
     { id: "access", title: "Acceso", text: "Sin contraseñas que recordar.", items: [
       { id: "passkeys", name: "Passkeys", vendor: "WebAuthn", mark: "PK", status: "available", text: "Entra con la huella o la cara de tu dispositivo." },
       { id: "otp", name: "Código de un solo uso", vendor: "Email o SMS", mark: "OTP", status: "available", text: "Segundo factor por email o SMS." },
-      { id: "cert-login", name: "Login con certificado o Cl@ve", vendor: "Identificación oficial", mark: "ID", status: "roadmap", text: "Entra con tu certificado digital o con Cl@ve." },
     ] },
-    { id: "commerce", title: "Comercio y TPV", text: "Una factura por cada venta, sin teclear.", items: [
-      { id: "shopify", name: "Shopify, WooCommerce y PrestaShop", vendor: "Tiendas online", mark: "Sh", status: "soon", text: "Factura o presupuesto automático por cada pedido de tu tienda." },
-      { id: "pos", name: "TPV físico", vendor: "Caja", mark: "TPV", status: "roadmap", text: "Ticket simplificado VERI*FACTU desde la caja." },
+    { id: "commerce", title: "Comercio online", text: "Una factura por cada venta, sin teclear.", items: [
+      { id: "shopify", name: "Shopify", vendor: "Tienda online", mark: "Sh", status: "beta", text: "Cuando un cliente pide factura en la compra, FactuIO la emite al cobrarse el pedido y se la envía por correo con el PDF." },
+      { id: "woo-presta", name: "WooCommerce y PrestaShop", vendor: "Tiendas online", mark: "WP", status: "roadmap", text: "Factura automática por cada pedido de tu tienda." },
     ] },
   ] as IntegrationCategory[],
   developers: {
