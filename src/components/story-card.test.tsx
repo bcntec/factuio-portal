@@ -36,9 +36,9 @@ describe("StoryCard", () => {
 
   it("shows the integration status pill only for stories that depend on a pending integration", () => {
     const { unmount } = render(<StoryCard story={shopify} />);
-    expect(screen.getByText(integrationStatusLabels.soon)).toBeInTheDocument();
+    expect(screen.getByText(integrationStatusLabels.beta)).toBeInTheDocument();
     unmount();
     render(<StoryCard story={marta as Story} />);
-    expect(screen.queryByText(integrationStatusLabels.soon)).not.toBeInTheDocument();
+    expect(screen.queryByText(integrationStatusLabels.beta)).not.toBeInTheDocument();
   });
 });

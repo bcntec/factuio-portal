@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: integraciones.meta.description,
 };
 
-const legendStatuses: IntegrationStatus[] = ["available", "beta", "soon", "roadmap"];
+const legendStatuses: IntegrationStatus[] = ["available", "beta", "soon", "roadmap", "evaluating"];
 
 export default function IntegrationsPage() {
   const i = integraciones;
