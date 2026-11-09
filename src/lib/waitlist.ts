@@ -2,7 +2,7 @@
  * Alta en la lista de espera con doble confirmación de Brevo.
  * Solo se usa en el servidor (ruta /api/waitlist): la clave de Brevo nunca llega al navegador.
  */
-export const WAITLIST_PROFILES = ["autonomo", "pyme", "gestoria"] as const;
+export const WAITLIST_PROFILES = ["autonomo", "pyme", "gestoria", "comunidad"] as const;
 export type WaitlistProfile = (typeof WAITLIST_PROFILES)[number];
 
 /** Valor que se guarda en el atributo PERFIL del contacto en Brevo. */
@@ -10,6 +10,7 @@ export const PROFILE_LABELS: Record<WaitlistProfile, string> = {
   autonomo: "Autónomo",
   pyme: "Pyme",
   gestoria: "Gestoría",
+  comunidad: "Comunidad o asociación",
 };
 
 /** Atributo de contacto en Brevo (tipo texto) donde se guarda el perfil. */

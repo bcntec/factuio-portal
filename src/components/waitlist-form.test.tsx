@@ -6,12 +6,11 @@ import { WaitlistForm } from "./waitlist-form";
 
 const w = site.waitlist;
 
-async function fill() {
+async function fill(source?: string) {
   const user = userEvent.setup();
-  render(<WaitlistForm />);
+  render(<WaitlistForm source={source} />);
   await user.type(screen.getByLabelText(w.form.email), "ana@empresa.es");
-  await user.click(screen.getByRole("combobox", { name: w.form.profile }));
-  await user.click(await screen.findByRole("option", { name: w.form.profiles.gestoria }));
+  await user.click(screen.getByRole("radio", { name: w.form.profiles.gestoria }));
   await user.click(screen.getByRole("checkbox"));
   await user.click(screen.getByRole("button", { name: w.form.submit }));
 }
@@ -34,6 +33,23 @@ describe("WaitlistForm", () => {
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
     vi.stubGlobal("fetch", fetchMock);
     await fill();
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ source: "loft15" });
+    sessionStorage.clear();
+  });
+
+  it("offers every profile as a visible option, including communities", () => {
+    render(<WaitlistForm />);
+    const group = screen.getByRole("group", { name: w.form.profile });
+    expect(group).toBeInTheDocument();
+    expect(screen.getAllByRole("radio")).toHaveLength(4);
+    expect(screen.getByRole("radio", { name: w.form.profiles.comunidad })).toBeInTheDocument();
+  });
+
+  it("uses the partner source over the remembered one", async () => {
+    sessionStorage.setItem("factuio.signup-source", "otro");
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    await fill("loft15");
     expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ source: "loft15" });
     sessionStorage.clear();
   });
