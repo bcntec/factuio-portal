@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { site } from "@/content/site";
+import { Select } from "@/components/ui/select";
 
 type Status = "idle" | "sending" | "done";
 type ErrorKey = keyof typeof site.waitlist.errors;
@@ -56,20 +57,24 @@ export function WaitlistForm() {
         {w.form.email}
         <input name="email" type="email" required autoComplete="email" placeholder={w.form.emailPlaceholder} className={field} />
       </label>
-      <label className="text-sm font-bold text-navy">
-        {w.form.profile}
-        <select name="profile" required defaultValue="" className={field}>
-          <option value="" disabled>{w.form.profilePlaceholder}</option>
-          {profileKeys.map((k) => <option key={k} value={k}>{w.form.profiles[k]}</option>)}
-        </select>
-      </label>
+      <div className="text-sm font-bold text-navy">
+        <label id="waitlist-profile-label" htmlFor="waitlist-profile">{w.form.profile}</label>
+        <Select
+          id="waitlist-profile"
+          name="profile"
+          required
+          aria-labelledby="waitlist-profile-label"
+          placeholder={w.form.profilePlaceholder}
+          options={profileKeys.map((k) => ({ value: k, label: w.form.profiles[k] }))}
+        />
+      </div>
       {/* Campo trampa para bots: oculto a personas y lectores de pantalla. */}
       <input name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <label className="flex items-start gap-3 text-sm text-muted-foreground">
         <input name="consent" type="checkbox" required className="mt-0.5 size-4 shrink-0 accent-[var(--bcn-mint)]" />
         <span>{w.form.consentBefore}<Link href="/legal/privacidad/" className="font-bold text-electric hover:underline">{w.form.consentLink}</Link>{w.form.consentAfter}</span>
       </label>
-      {error && <p role="alert" className="text-sm font-semibold text-red-700">{w.errors[error]}</p>}
+      {error && <p role="alert" className="text-sm font-semibold text-negative-ink">{w.errors[error]}</p>}
       <button type="submit" disabled={status === "sending"} className="rounded-lg bg-mint px-7 py-3 font-bold text-white hover:bg-mint-600 disabled:opacity-60">
         {status === "sending" ? w.form.sending : w.form.submit}
       </button>

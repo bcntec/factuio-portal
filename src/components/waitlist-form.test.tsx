@@ -10,7 +10,8 @@ async function fill() {
   const user = userEvent.setup();
   render(<WaitlistForm />);
   await user.type(screen.getByLabelText(w.form.email), "ana@empresa.es");
-  await user.selectOptions(screen.getByLabelText(w.form.profile), "gestoria");
+  await user.click(screen.getByRole("combobox", { name: w.form.profile }));
+  await user.click(await screen.findByRole("option", { name: w.form.profiles.gestoria }));
   await user.click(screen.getByRole("checkbox"));
   await user.click(screen.getByRole("button", { name: w.form.submit }));
 }
