@@ -23,7 +23,7 @@ export const automatizaciones = {
   hero: {
     eyebrow: "Automatizaciones",
     title: "Que la facturación se haga sola, y tú solo lo revisas",
-    sub: "Recetas que se activan con un clic, tu IA conectada por MCP, flujos en n8n o Make, webhooks firmados y correos que entran y salen solos. Lo fiscal sigue pasando por una persona.",
+    sub: "Recetas que se activan con un clic, tu IA conectada por MCP, flujos en n8n o Make, webhooks firmados y correos que entran y salen solos. Emitir en tu nombre exige siempre tu consentimiento explícito.",
     chips: [
       { tone: "mint", text: "Recetas listas para activar" },
       { tone: "sky", text: "MCP · n8n · Make" },
@@ -35,7 +35,7 @@ export const automatizaciones = {
   recipes: {
     eyebrow: "Sin configurar nada",
     title: "Recetas listas para activar",
-    sub: "Dentro de FactuIO, en Automatizaciones. Las activas o las paras cuando quieras y ves el histórico de cada ejecución. Ninguna receta emite facturas, habla con la AEAT ni mueve dinero.",
+    sub: "Dentro de FactuIO, en Automatizaciones. Las activas o las paras cuando quieras y ves el histórico de cada ejecución. Las que emiten facturas en tu nombre solo se activan con tu consentimiento explícito, confirmado con un código de un solo uso.",
     items: [
       { icon: "Send", title: "Enviar la factura al emitir", text: "En cuanto emites, el cliente la recibe por correo con el PDF. Sin pasos manuales." },
       { icon: "Repeat", title: "Recordatorios de impago", text: "Avisos escalonados a quien no ha pagado, con la plantilla de correo de tu empresa. Se detienen solos al cobrar o rectificar la factura, o cuando tú lo decides." },
