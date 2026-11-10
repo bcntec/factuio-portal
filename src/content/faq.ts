@@ -1,4 +1,4 @@
-export type FaqTag = "home" | "pricing" | "gestoria" | "verifactu" | "historias";
+export type FaqTag = "home" | "pricing" | "gestoria" | "verifactu" | "historias" | "ia";
 export interface FaqItem { q: string; a: string; tags: FaqTag[] }
 
 export const faq: FaqItem[] = [
@@ -32,4 +32,12 @@ export const faq: FaqItem[] = [
     a: "Sí. Cambias de plan desde tu cuenta y se aplica al siguiente ciclo. Tus facturas, contactos y gastos se quedan donde están." },
   { q: "Mi gestoría ya usa FactuIO, ¿necesito mi propia cuenta?", tags: ["historias"],
     a: "No. Tu gestoría te invita por email, entras con tu móvil y ves solo tu empresa. Subes tickets y facturas desde la app y tu gestor se encarga del resto, sin coste adicional para ti." },
+  { q: "¿Qué es MCP?", tags: ["ia"],
+    a: "Model Context Protocol: un estándar abierto para que un asistente de IA use herramientas externas. Con él, Claude o ChatGPT pueden consultar y preparar datos en FactuIO como lo harías tú." },
+  { q: "¿Mis datos entrenan a la IA?", tags: ["ia"],
+    a: "FactuIO no entrena modelos con tus datos. Con MCP, los datos van al asistente que tú elijas, con las condiciones de ese proveedor. En MAIAA puedes usar tu propia clave de IA." },
+  { q: "¿Puede la IA enviar una factura a Hacienda por su cuenta?", tags: ["ia"],
+    a: "No. El asistente prepara borradores y te pide confirmación antes de cambiar nada; presentar impuestos y actuar ante la AEAT queda fuera de su alcance." },
+  { q: "¿Necesito saber programar?", tags: ["ia"],
+    a: "No para MAIAA ni para conectar Claude o ChatGPT: copias un fragmento de configuración. La API y los webhooks son para quien quiera automatizar." },
 ];

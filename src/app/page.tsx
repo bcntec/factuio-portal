@@ -23,6 +23,19 @@ export default function HomePage() {
         <FeatureGrid features={home.features} />
       </section>
       <section className="mx-auto max-w-[1120px] px-6 py-16">
+        <div className="grid items-center gap-10 rounded-3xl bg-navy p-8 text-white md:grid-cols-[1.1fr_1fr] md:p-12">
+          <div>
+            <p className="bcn-eyebrow mb-3 text-mint">{home.aiTeaser.eyebrow}</p>
+            <h2 className="text-3xl text-white md:text-4xl">{home.aiTeaser.title}</h2>
+            <p className="mt-4 text-navy-muted">{home.aiTeaser.text}</p>
+            <Link href="/ia/" className="mt-6 inline-block rounded-lg bg-mint px-6 py-3 font-bold text-white hover:bg-mint-600">{home.aiTeaser.cta}</Link>
+          </div>
+          <ul className="flex flex-col gap-3">
+            {home.aiTeaser.prompts.map((p) => <li key={p} className="rounded-xl bg-white/10 px-4 py-3 text-[15px]">{p}</li>)}
+          </ul>
+        </div>
+      </section>
+      <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={home.sections.steps.eyebrow} title={home.sections.steps.title} />
         <Steps steps={home.steps} />
       </section>

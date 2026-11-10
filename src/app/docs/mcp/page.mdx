@@ -1,0 +1,93 @@
+export const metadata = { title: "Conectar tu IA por MCP", description: "Cómo conectar Claude, ChatGPT u otro cliente MCP a tu cuenta de FactuIO con una clave MCP personal." };
+
+# Conectar tu IA por MCP
+
+FactuIO tiene un servidor **MCP** (Model Context Protocol): el estándar con el que un asistente de IA usa herramientas externas. Conectado a tu cuenta, tu asistente puede consultar tus facturas, clientes, gastos e impuestos y prepararte borradores, con tus mismos permisos.
+
+---
+
+## Qué necesitas
+
+1. Una cuenta de FactuIO con **segundo factor activo** (teléfono verificado, app de códigos o passkey).
+2. Un cliente compatible con MCP: Claude Code, Claude Desktop, ChatGPT u otro.
+
+<Callout kind="info" title="La IA prepara; tú decides">
+
+Las herramientas que cambian datos devuelven primero una **vista previa** y no guardan nada hasta que confirmas. El asistente nunca presenta impuestos ni actúa ante la AEAT.
+
+</Callout>
+
+---
+
+## 1. Crea una clave MCP personal
+
+En FactuIO, abre el menú de usuario → **Seguridad y claves MCP** → **Nueva clave**.
+
+- **Caducidad:** 30, 90 o 365 días.
+- **Solo lectura:** márcalo si quieres que el asistente consulte pero no pueda preparar cambios.
+- Te pediremos un código de tu segundo factor.
+
+La clave empieza por `pat_` y **solo se muestra una vez**, junto con la configuración ya rellenada para cada cliente. Guárdala en un sitio seguro. Puedes tener hasta 5 claves activas y revocarlas cuando quieras.
+
+---
+
+## 2. Conecta tu cliente
+
+### Claude Code
+
+```bash
+claude mcp add --transport http factuio <URL de tu cuenta>/mcp \
+  --header "X-API-Key: pat_…"
+```
+
+Compruébalo con `/mcp` dentro de Claude Code.
+
+### Claude Desktop
+
+Edita `claude_desktop_config.json` (en macOS, `~/Library/Application Support/Claude/`):
+
+```json
+{
+  "mcpServers": {
+    "factuio": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "<URL de tu cuenta>/mcp", "--header", "X-API-Key:${FACTUIO_MCP_KEY}"],
+      "env": { "FACTUIO_MCP_KEY": "pat_…" }
+    }
+  }
+}
+```
+
+Reinicia Claude Desktop: aparece el conector **factuio** con sus herramientas.
+
+### ChatGPT y otros clientes
+
+Si el conector permite añadir una cabecera, usa `X-API-Key: pat_…` con la URL de tu cuenta terminada en `/mcp`.
+
+---
+
+## 3. Prueba con estas peticiones
+
+```text
+¿Cuánto he facturado este trimestre y cuánto tengo pendiente de cobro?
+```
+
+```text
+Hazle una factura a Estudio Pepito por 3 horas de consultoría a 60 €.
+```
+
+```text
+¿Cuánto IVA voy a pagar este trimestre? Déjame preparado el borrador del 303.
+```
+
+Más ejemplos en [FactuIO con IA](/ia/#casos).
+
+---
+
+## Seguridad
+
+- La clave **actúa como tú**: ve y cambia solo lo que tu rol permite en cada empresa.
+- **Solo sirve para MCP**: en el resto de la API se rechaza.
+- Cada acción queda **auditada** con tu usuario y el canal «agente».
+- Lo que escriben terceros (correos, mensajes, notas) llega al asistente **marcado como no confiable**.
+- Si desactivan tu usuario o revocas la clave, deja de funcionar en la siguiente petición.

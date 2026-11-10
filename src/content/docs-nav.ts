@@ -7,5 +7,6 @@ export const docsNav: NavItem[] = [
   { label: "Rol Tenant", href: "/docs/rol-tenant/" },
   { label: "Rol Signer", href: "/docs/rol-signer/" },
   { label: "Uso de la API", href: "/docs/api/" },
+  { label: "Conectar tu IA (MCP)", href: "/docs/mcp/" },
   { label: "Modelo 390 con IA", href: "/docs/modelo-390-con-ia/" },
 ];

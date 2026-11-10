@@ -1,4 +1,4 @@
-export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye" | "Link2" | "QrCode" | "Send" | "ShieldCheck" | "ScrollText" | "Calculator" | "Sparkles";
+export type IconName = "FileCheck2" | "FileText" | "Receipt" | "Repeat" | "Inbox" | "Smartphone" | "Building2" | "PenLine" | "Share2" | "Users" | "Eye" | "Link2" | "QrCode" | "Send" | "ShieldCheck" | "ScrollText" | "Calculator" | "Sparkles" | "Bot" | "Plug" | "KeyRound" | "History" | "Workflow" | "ShieldAlert" | "Hand" | "BookOpenCheck";
 export interface Feature { icon: IconName; title: string; text: string; link?: { href: string; label: string } }
 export interface Step { title: string; text: string }
 
@@ -12,6 +12,7 @@ export const home = {
       { tone: "peach", text: "Sin permanencia" },
       { tone: "sky", text: "Prueba 30 días gratis" },
       { tone: "pink", text: "Soporte en español" },
+      { tone: "mint", text: "Pídeselo a tu IA: MAIAA y MCP" },
     ] as { tone: "mint" | "peach" | "sky" | "pink"; text: string }[],
     primary: "Empieza gratis",
     secondary: "Ver precios",
@@ -45,6 +46,13 @@ export const home = {
     title: "Hecho para la normativa española",
     text: "Cada factura se firma, se encadena con hash SHA-256 y se remite a la AEAT en el momento. Tus modelos 303, 130 y 390 salen calculados de esas mismas facturas y gastos, con presentación directa a la AEAT. Guardamos la evidencia de cada envío para que nunca tengas que demostrarlo tú. Tus facturas ya salen en Facturae y puedes enviarlas a la administración pública por FACe; cuando llegue la factura electrónica entre empresas, ya estarás listo.",
     seals: ["VERI*FACTU", "TicketBAI", "Modelos 303 / 130 / 390", "RGPD", "Firma delegada (Anexo I)"] as string[],
+  },
+  aiTeaser: {
+    eyebrow: "Orientado a IA",
+    title: "Tu facturación, también desde tu IA",
+    text: "Pídele a MAIAA, a Claude o a ChatGPT que prepare una factura, reclame un impago o deje listo el 303. FactuIO te enseña lo que va a hacer y espera tu confirmación.",
+    prompts: ["«Hazle una factura a Estudio Pepito por 3 horas a 60 €»", "«¿Quién me debe dinero desde hace más de 30 días?»", "«Déjame preparado el 303 de este trimestre»"] as string[],
+    cta: "Descubre FactuIO con IA →",
   },
   gestoriasTeaser: {
     eyebrow: "Para gestorías",
