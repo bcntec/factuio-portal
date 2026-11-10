@@ -36,6 +36,34 @@ export default function AutomationsPage() {
       <section id="recetas" className="mx-auto max-w-[1120px] scroll-mt-20 px-6 py-16">
         <SectionHeading eyebrow={a.recipes.eyebrow} title={a.recipes.title} sub={a.recipes.sub} />
         <FeatureGrid features={a.recipes.items} />
+        <h3 className="mt-12 mb-5 text-xl text-navy">{a.recipes.moreTitle}</h3>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {a.recipes.more.map((r) => (
+            <article key={r.when} className="rounded-xl border border-border bg-card p-5">
+              <span className={`rounded-md px-2 py-0.5 text-[12px] font-bold ${statusClass[r.status]}`}>{a.statusLabels[r.status]}</span>
+              <p className="mt-3 text-[14px] text-muted-foreground"><strong className="text-navy">Cuando:</strong> {r.when}</p>
+              <p className="mt-1 text-[14px] text-muted-foreground"><strong className="text-navy">Entonces:</strong> {r.then}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="gastos" className="scroll-mt-20 bg-card px-6 py-16">
+        <div className="mx-auto max-w-[1120px]">
+          <SectionHeading eyebrow={a.expenseChannels.eyebrow} title={a.expenseChannels.title} sub={a.expenseChannels.sub} />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {a.expenseChannels.items.map((c) => (
+              <article key={c.id} className="rounded-xl border border-border bg-background p-5 brutal-shadow-sm">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-lg text-navy">{c.name}</h3>
+                  <span className={`rounded-md px-2 py-0.5 text-[12px] font-bold ${statusClass[c.status]}`}>{a.statusLabels[c.status]}</span>
+                </div>
+                <p className="mt-2 text-[14px] text-muted-foreground">{c.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-[14px] text-muted-foreground">{a.expenseChannels.note}</p>
+        </div>
       </section>
 
       <section id="conectores" className="mx-auto max-w-[1120px] scroll-mt-20 px-6 py-16">

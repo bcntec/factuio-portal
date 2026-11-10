@@ -42,6 +42,27 @@ export const automatizaciones = {
       { icon: "FileText", title: "Seguimiento de presupuestos", text: "Recuerda al cliente los presupuestos enviados que siguen sin respuesta." },
       { icon: "ScrollText", title: "Etiquetar facturas", text: "Marca automáticamente las facturas grandes o las de un cliente concreto para revisarlas o filtrarlas." },
     ] as Feature[],
+    moreTitle: "Más ejemplos de recetas",
+    more: [
+      { status: "soon", when: "Un cliente sube un ticket", then: "Avisa a su gestor por mensaje interno, solo si supera el importe que elijas." },
+      { status: "soon", when: "Llega una factura de un proveedor habitual", then: "Confirma sola la propuesta de gasto cuando ya has aprobado varias suyas." },
+      { status: "soon", when: "La AEAT rechaza un envío", then: "Avisa al responsable y abre el caso para arreglarlo con MAiaa." },
+      { status: "soon", when: "Se cobra una factura", then: "Envía el recibo al cliente por correo." },
+      { status: "soon", when: "Se cierra el trimestre", then: "Manda un resumen al gestor o al cliente." },
+      { status: "soon", when: "Pasa cualquier evento", then: "Lo reenvía a tu sistema por webhook." },
+    ] as { status: ConnectorStatus; when: string; then: string }[],
+  },
+  expenseChannels: {
+    eyebrow: "Gastos sin teclear",
+    title: "Reenvía el ticket por donde quieras y se convierte en gasto",
+    sub: "Correo, WhatsApp o Telegram: mandas la foto del ticket o el PDF de la factura y FactuIO lee proveedor, fecha, base e IVA. Te llega como propuesta de gasto y tú la confirmas.",
+    items: [
+      { id: "email", name: "Correo", status: "beta", text: "Conecta tu Gmail y FactuIO revisa los adjuntos de las facturas que te llegan. Outlook, en camino." },
+      { id: "app", name: "App móvil", status: "available", text: "Haz la foto del ticket con el móvil y queda registrado al momento." },
+      { id: "whatsapp", name: "WhatsApp", status: "soon", text: "Reenvía el ticket o la factura al número de FactuIO de tu empresa." },
+      { id: "telegram", name: "Telegram", status: "soon", text: "Mándalo al bot de FactuIO, desde el móvil o el ordenador." },
+    ] as { id: string; name: string; status: ConnectorStatus; text: string }[],
+    note: "Cada gasto entra como propuesta: nada se registra sin tu confirmación, salvo que actives la receta de proveedores conocidos.",
   },
   connectors: {
     eyebrow: "Conectores",
