@@ -1,11 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
-import { BREVO_DOI_URL, createRateLimiter, parseWaitlist, readBrevoConfig, requestDoubleOptIn } from "./waitlist";
+import { BREVO_DOI_URL, createRateLimiter, normalizeSource, parseWaitlist, readBrevoConfig, requestDoubleOptIn } from "./waitlist";
 
 const valid = { email: " Ana@Empresa.ES ", profile: "pyme", consent: true };
 
 describe("parseWaitlist", () => {
   it("accepts a valid request and normalises the email", () => {
-    expect(parseWaitlist(valid)).toEqual({ ok: true, value: { email: "ana@empresa.es", profile: "pyme" } });
+    expect(parseWaitlist(valid)).toEqual({ ok: true, value: { email: "ana@empresa.es", profile: "pyme", source: "web" } });
+    expect(parseWaitlist({ ...valid, source: "Loft15" })).toEqual({ ok: true, value: { email: "ana@empresa.es", profile: "pyme", source: "loft15" } });
   });
   it("rejects a bad email, an unknown profile and a missing consent", () => {
     expect(parseWaitlist({ ...valid, email: "ana@" })).toEqual({ ok: false, error: "invalid_email" });
@@ -32,23 +33,34 @@ describe("readBrevoConfig", () => {
   });
 });
 
+describe("normalizeSource", () => {
+  it("keeps short slugs in lowercase and falls back to web for anything else", () => {
+    expect(normalizeSource(" Loft15 ")).toBe("loft15");
+    expect(normalizeSource("feria_2026-bcn")).toBe("feria_2026-bcn");
+    expect(normalizeSource(undefined)).toBe("web");
+    expect(normalizeSource("")).toBe("web");
+    expect(normalizeSource("<script>")).toBe("web");
+    expect(normalizeSource("a".repeat(41))).toBe("web");
+  });
+});
+
 describe("requestDoubleOptIn", () => {
   const cfg = { apiKey: "secret", listId: 7, templateId: 12, redirectionUrl: "https://factuio.app/lista-espera/confirmada/" };
   it("posts the contact, list, template, redirect and profile attribute to Brevo", async () => {
     const fetchImpl = vi.fn().mockResolvedValue(new Response(null, { status: 201 }));
-    await expect(requestDoubleOptIn({ email: "ana@empresa.es", profile: "gestoria" }, cfg, fetchImpl)).resolves.toBe(true);
+    await expect(requestDoubleOptIn({ email: "ana@empresa.es", profile: "gestoria", source: "loft15" }, cfg, fetchImpl)).resolves.toBe(true);
     const [url, init] = fetchImpl.mock.calls[0];
     expect(url).toBe(BREVO_DOI_URL);
     expect(init.headers["api-key"]).toBe("secret");
     expect(JSON.parse(init.body)).toEqual({
-      email: "ana@empresa.es", attributes: { PERFIL: "Gestoría" }, includeListIds: [7], templateId: 12,
+      email: "ana@empresa.es", attributes: { PERFIL: "Gestoría", ORIGEN: "loft15" }, includeListIds: [7], templateId: 12,
       redirectionUrl: "https://factuio.app/lista-espera/confirmada/",
     });
   });
   it("returns false and logs only the status when Brevo fails", async () => {
     const err = vi.spyOn(console, "error").mockImplementation(() => {});
     const fetchImpl = vi.fn().mockResolvedValue(new Response(JSON.stringify({ code: "unauthorized" }), { status: 401 }));
-    await expect(requestDoubleOptIn({ email: "ana@empresa.es", profile: "pyme" }, cfg, fetchImpl)).resolves.toBe(false);
+    await expect(requestDoubleOptIn({ email: "ana@empresa.es", profile: "pyme", source: "web" }, cfg, fetchImpl)).resolves.toBe(false);
     expect(err.mock.calls[0][0]).toContain("HTTP 401 unauthorized");
     expect(err.mock.calls[0][0]).not.toContain("secret");
     expect(err.mock.calls[0][0]).not.toContain("ana@");

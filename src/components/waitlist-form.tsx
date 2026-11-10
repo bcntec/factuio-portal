@@ -3,15 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { site } from "@/content/site";
-import { Select } from "@/components/ui/select";
+import { ProfileOptions } from "@/components/profile-options";
+import { currentSource } from "@/lib/signup-source";
 
 type Status = "idle" | "sending" | "done";
 type ErrorKey = keyof typeof site.waitlist.errors;
 
 const apiPath = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/waitlist/`;
-const profileKeys = ["autonomo", "pyme", "gestoria"] as const;
+const profileKeys = ["autonomo", "pyme", "gestoria", "comunidad"] as const;
 
-export function WaitlistForm() {
+/** `source` fija el origen (páginas de socio); si no, se toma de ?origen= / utm_source. */
+export function WaitlistForm({ source }: { source?: string } = {}) {
   const w = site.waitlist;
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<ErrorKey | null>(null);
@@ -30,6 +32,7 @@ export function WaitlistForm() {
           profile: data.get("profile"),
           consent: data.get("consent") === "on",
           website: data.get("website"),
+          source: source ?? currentSource(window.location.search),
         }),
       });
       if (res.ok) { setStatus("done"); return; }
@@ -57,17 +60,11 @@ export function WaitlistForm() {
         {w.form.email}
         <input name="email" type="email" required autoComplete="email" placeholder={w.form.emailPlaceholder} className={field} />
       </label>
-      <div className="text-sm font-bold text-navy">
-        <label id="waitlist-profile-label" htmlFor="waitlist-profile">{w.form.profile}</label>
-        <Select
-          id="waitlist-profile"
-          name="profile"
-          required
-          aria-labelledby="waitlist-profile-label"
-          placeholder={w.form.profilePlaceholder}
-          options={profileKeys.map((k) => ({ value: k, label: w.form.profiles[k] }))}
-        />
-      </div>
+      <ProfileOptions
+        name="profile"
+        legend={w.form.profile}
+        options={profileKeys.map((k) => ({ value: k, label: w.form.profiles[k] }))}
+      />
       {/* Campo trampa para bots: oculto a personas y lectores de pantalla. */}
       <input name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <label className="flex items-start gap-3 text-sm text-muted-foreground">

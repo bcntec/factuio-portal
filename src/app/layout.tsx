@@ -5,6 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteJsonLd } from "@/components/site-jsonld";
 import { site, siteUrl } from "@/content/site";
+import { SourceCapture } from "@/components/source-capture";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const spaceGrotesk = Space_Grotesk({ variable: "--font-display", subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="es">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}>
         <SiteJsonLd />
+        <SourceCapture />
         <SiteNav />
         <div className="min-h-[60vh]">{children}</div>
         <SiteFooter />
