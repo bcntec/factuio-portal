@@ -31,8 +31,9 @@ export default async function PartnerPage({ params }: Props) {
           ? <Image src={`${base}${p.logo.src}`} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-16 w-auto" priority />
           : <span className="text-2xl font-bold text-navy">{p.name}</span>}
       </div>
-      <h1 className="mt-10 text-4xl text-navy md:text-5xl">{p.title}</h1>
-      <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">{p.text}</p>
+      {/* El título no se ve (los logos ya lo dicen), pero queda para lectores de pantalla y buscadores. */}
+      <h1 className="sr-only">{p.title}</h1>
+      <p className="mx-auto mt-8 max-w-xl text-lg text-muted-foreground">{p.text}</p>
       <div className="mx-auto mt-10 max-w-md"><WaitlistForm source={p.slug} /></div>
     </main>
   );
