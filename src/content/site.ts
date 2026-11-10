@@ -2,7 +2,7 @@ export interface NavItem { label: string; href: string }
 export interface FooterColumn { title: string; links: NavItem[] }
 
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://factuio.app").replace(/\/+$/, "");
-export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/ia/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/docs/mcp/", "/docs/modelo-390-con-ia/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/", "/lista-espera/"];
+export const siteRoutes = ["/", "/precios/", "/gestorias/", "/integraciones/", "/automatizaciones/", "/ia/", "/verifactu/", "/historias/", "/docs/", "/docs/rol-tenant/", "/docs/rol-signer/", "/docs/api/", "/docs/mcp/", "/docs/modelo-390-con-ia/", "/legal/privacidad/", "/legal/terminos/", "/legal/cookies/", "/declaracion-responsable/", "/declaracion-responsable/historico/", "/lista-espera/"];
 
 export const site = {
   name: "FactuIO",
@@ -14,6 +14,7 @@ export const site = {
     { label: "Precios", href: "/precios/" },
     { label: "Gestorías", href: "/gestorias/" },
     { label: "Integraciones", href: "/integraciones/" },
+    { label: "Automatizaciones", href: "/automatizaciones/" },
     { label: "VeriFactu", href: "/verifactu/" },
     { label: "Historias", href: "/historias/" },
   ] as NavItem[],

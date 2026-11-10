@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import Image from "next/image";
+import { Check, MessageSquare, Paperclip } from "lucide-react";
 import { Chip } from "@/components/chip";
 import { FeatureGrid } from "@/components/feature-grid";
 import { Steps } from "@/components/steps";
@@ -31,6 +32,33 @@ export default function AdvisorsPage() {
       <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={g.sections.benefits.eyebrow} title={g.sections.benefits.title} />
         <FeatureGrid features={g.benefits} />
+      </section>
+      <section id="mensajes" className="bg-card px-6 py-16">
+        <div className="mx-auto grid max-w-[1120px] items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <p className="bcn-eyebrow mb-3">{g.messaging.eyebrow}</p>
+            <h2 className="text-3xl text-navy md:text-4xl">{g.messaging.title}</h2>
+            <p className="mt-4 text-lg text-muted-foreground">{g.messaging.sub}</p>
+            <ul className="mt-6 flex flex-col gap-3 text-[15px] text-navy">
+              {g.messaging.points.map((p) => <li key={p} className="flex items-start gap-2.5"><span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md bg-mint text-white"><Check size={12} strokeWidth={3} aria-hidden="true" /></span>{p}</li>)}
+            </ul>
+          </div>
+          {g.messaging.image ? (
+            <Image src={g.messaging.image.src} alt={g.messaging.image.alt} width={g.messaging.image.width} height={g.messaging.image.height} className="w-full rounded-xl border border-border brutal-shadow-sm" />
+          ) : (
+            <div aria-hidden="true" className="rounded-xl border border-border bg-background p-5 brutal-shadow-sm">
+              <div className="flex items-center gap-2 border-b border-border pb-3">
+                <span className="grid size-7 place-items-center rounded-lg bg-navy text-white"><MessageSquare size={15} /></span>
+                <p className="bcn-label">Mensajes · Taller Mar SL</p>
+              </div>
+              <div className="flex flex-col gap-3 pt-4 text-[14px]">
+                <p className="max-w-[85%] rounded-xl rounded-bl-sm bg-muted px-3.5 py-2.5 text-navy">Hola, os paso el ticket de la gasolina y la factura del alquiler de octubre.</p>
+                <span className="inline-flex w-fit items-center gap-1.5 rounded-md bg-mint-tint px-2 py-1 font-mono text-[12px] text-electric"><Paperclip size={12} />alquiler-octubre.pdf</span>
+                <p className="ml-auto max-w-[85%] rounded-xl rounded-br-sm bg-sky px-3.5 py-2.5 text-navy">Recibido. Lo dejo registrado como gasto y te preparo el 303 esta semana.</p>
+              </div>
+            </div>
+          )}
+        </div>
       </section>
       <section className="mx-auto max-w-[1120px] px-6 py-16">
         <SectionHeading eyebrow={g.sections.steps.eyebrow} title={g.sections.steps.title} />

@@ -23,6 +23,18 @@ export const gestorias = {
     { icon: "Eye", title: "Visibilidad de todo el porfolio", text: "Qué facturas faltan por presentar, qué gastos por revisar y qué autorizaciones caducan." },
     { icon: "Calculator", title: "Modelos 303, 130 y 390 de toda la cartera", text: "Una bandeja con los modelos de cada cliente, calculados desde sus facturas y gastos, que presentas en su nombre con su autorización." },
   ] as Feature[],
+  messaging: {
+    eyebrow: "Comunicación interna",
+    title: "Habla con tus clientes sin salir de FactuIO",
+    sub: "Cada cliente del despacho, o cada miembro de la comunidad que lleváis, tiene un canal directo contigo. Las dudas, los tickets y las facturas quedan junto a su empresa, no perdidos en el WhatsApp o el correo.",
+    points: [
+      "Mensajes en tiempo real entre el despacho y los usuarios de cada empresa cliente, en la web y en el móvil.",
+      "Solo con quien ya trabajas: la conversación se abre cuando el cliente la acepta, nada de mensajes no deseados.",
+      "Adjuntos de hasta 25 MB: PDF, fotos de tickets, XML y ZIP.",
+      "Avisos de mensaje nuevo, y cada cliente decide qué notificaciones recibe.",
+    ],
+    image: null as { src: string; alt: string; width: number; height: number } | null,
+  },
   steps: [
     { title: "Invita a tu cliente", text: "Recibe un email, entra con su móvil y ve solo su empresa." },
     { title: "Firma la autorización", text: "Acepta el Anexo I desde su cuenta. Queda registrado con fecha y evidencia." },
