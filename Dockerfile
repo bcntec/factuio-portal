@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-ARG NEXT_PUBLIC_APP_URL=https://factuio.bcntec.dev
+ARG NEXT_PUBLIC_APP_URL=https://sandbox.factuio.app
 ARG NEXT_PUBLIC_SITE_URL=https://factuio.app
 ARG NEXT_PUBLIC_BASE_PATH=
 ARG NEXT_PUBLIC_FEATURES_LIVE=
